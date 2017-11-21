@@ -1,0 +1,4 @@
+.steps-guide
+  .step-indicators
+    - @progresses[:items].each do |key, text|
+      = link_to "", progress_bar_step_link(key, person), title: text, class: bottom_progress_bar_item_state_class(@progresses, key)

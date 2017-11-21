@@ -1,0 +1,17 @@
+= form_for @person, url: (@person.kind_of?(Business) ? business_account_setup_step5_path : worker_account_setup_step5_path), 
+method: :put, data: {toggle: "validator"} do |f|
+  / Describe your business
+  .form-group.has-feedback
+    %label{:for => "business-description"}
+      = @person.kind_of?(Business) ? t("account_setup.business.step4.describe_your_business") : t("account_setup.worker.step4.describe_your_exp")
+      %span.required-mark *
+    = f.text_area :description, id: "business-description", class: "form-control", "data-minlength": "50", required: true, rows: 5, id: "main_description_input"
+    %span.glyphicon.form-control-feedback{"aria-hidden" => "true"}
+    .help-block.with-errors=@person.kind_of?(Business) ? t("account_setup.business.step4.please_minimum_characters") : t("account_setup.worker.step4.please_minimum_characters")
+  / /.form-group
+  / Next Step button
+  #next-step-buton.btn-wrapper.btn-centered
+    %button.btn.btn-primary.hvr-pop{:type => "submit"}=t("account_setup.business.next_step")
+  / /.btn-wrapper
+  / Steps visual guide
+  = render "account_setup/shared/bottom_progress_bar", progresses: @progresses, person: @person

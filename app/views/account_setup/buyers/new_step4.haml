@@ -1,0 +1,39 @@
+.account-setup
+  %main
+    .container
+      = render "account_setup/shared/header", person: @person, progresses: @progresses, title: @title
+      / Form and card
+      .row.split-screen.form-wrapper
+        / Left column
+        #split-screen-left.col-md-6.split-screen-col.no-row-margins
+          .split-screen-col-inner
+            = form_for @listing, url: buyer_account_setup_step5_path, 
+            method: :put, data: {toggle: "validator"} do |f|
+              / Describe your business
+              .form-group.has-feedback
+                %label{:for => "business-description"}
+                  = t("account_setup.buyer.step4.describe_your_project")
+                  %span.required-mark *
+                = f.text_area :description, class: "form-control", "data-minlength": "50", required: true, rows: 5, id: "main_description_input"
+                %span.glyphicon.form-control-feedback{"aria-hidden" => "true"}
+                .help-block.with-errors=t("account_setup.buyer.step4.please_write_minimum_50_chars")
+              .form-group.has-feedback
+                %label{:for => "business-description"}
+                  = t("account_setup.buyer.step4.required_completion_date")
+                  %span.required-mark *
+                  / = f.text_field :valid_until, value: @listing.valid_until.try(:strftime, "%m/%d/%Y"), class: "form-control", "data-minlength": "10", required: true, rows: 5, id: "project_valid_until"
+                = f.select :valid_until_turnaround, options_for_select(turnaround_options_list, @listing.valid_until_turnaround),
+                  {:include_blank => '-- Select project urgency --',
+                  class: "form-control", 
+                  required: "true"}
+                / %span.glyphicon.form-control-feedback{"aria-hidden" => "true"}
+              / /.form-group
+              / Next Step button
+              #next-step-buton.btn-wrapper.btn-centered
+                %button.btn.btn-primary.hvr-pop{:type => "submit"}= t("account_setup.business.next_step")
+              / /.btn-wrapper
+              / Steps visual guide
+              = render "account_setup/shared/bottom_progress_bar", progresses: @progresses, person: @person
+        #split-screen-right.col-md-6.split-screen-col
+          .split-screen-col-inner
+            = render "account_setup/shared/project_card", listing: @listing

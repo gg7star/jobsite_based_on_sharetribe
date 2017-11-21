@@ -1,0 +1,4 @@
+= cf.collection_check_boxes :category_id, options_for_buyer_skill_select(selected_category), :id, :display_name, checked: @listing.listing_skills.pluck(:category_id) do |b|
+	%div{:class=>"col-xs-#{b.text.length < 20 ? 6:12}"}
+		= b.check_box 
+		= b.label

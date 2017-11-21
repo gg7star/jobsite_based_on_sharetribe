@@ -1,0 +1,13 @@
+%section#inbox-toolbar-wrap.clearfix
+  .container.search-page-toolbar
+    #inbox-toolbar-inner
+      / Messages Filter
+      #messages-filter
+        = yield :search_bar_left_block
+      / #messages-filter
+      / Messages Search
+      #messages-search
+        .widget
+          %form
+            %i.fa.fa-search.close-search.search-button
+            %input.search-input{:name => "search", :placeholder => "Search again", :type => "text"}/

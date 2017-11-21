@@ -1,0 +1,107 @@
+- content_for :javascript do
+  initialize_signup_form("#{I18n.locale}","#{t("people.new.username_is_in_use")}","#{t("people.new.username_is_invalid")}","#{email_not_accepted_message}", "#{t("people.new.invalid_invitation_code")}", #{@current_community.real_name_required?}, #{@current_community.join_with_invite_only?} );
+
+/ Main content area
+.register
+  %main
+    .container
+      .row
+        #create-account-title.col-md-8.col-md-offset-2.register-content-title
+          %h1
+            Create a new
+            %span.grn JOB
+            %span.blu &CIE
+            account
+      #completed-form.row.form-wrapper
+        .col-md-6.col-md-offset-3
+          .register-content-wrapper
+          - if @community_customization && @community_customization.signup_info_content
+            %p
+              = @community_customization.signup_info_content.html_safe
+          - elsif @current_community.allowed_emails
+            %p
+              = t('.email_restriction_instructions',
+                    :community_name => @current_community.name(I18n.locale),
+                    :allowed_emails => @current_community.allowed_emails,
+                    :count => (@current_community.allowed_emails.split(",").count))
+
+          - unless !facebook_connect_in_use? || params[:no_fb]
+            = render :partial => "layouts/facebook_connect_button", :locals => { :button_text => t(".create_account_with_facebook") }
+         
+            = render :partial => "layouts/linkedin_connect_button", :locals => { :button_text => t(".create_account_with_linkedin") }
+
+          / /.btn-wrapper
+          .lined-heading
+            %h3
+              %span.line-left>  
+              = t(".OR")
+              %span.line-right  
+          / /.lined-heading
+          %h3.bare.centered
+            = t(".signup_with_email")
+
+          = form_for @person, :url => APP_CONFIG.login_domain.to_s + people_path, :html=>{:"data-toggle"=>"validator"} do |form|
+
+            -# Invite code
+            - if @current_community.join_with_invite_only?
+              .inline-label-container
+                = label_tag :invitation_code, t('.invitation_code'), :class => "inline"
+                = link_to(t('common.what_is_this'), "#", :tabindex => "-1", :id => "help_invitation_code_link", :class => "label-info")
+              = text_field_tag "invitation_code", nil, :class => :text_field, :maxlength => "20", :value => (params[:code] || "")
+            - elsif params[:code]
+              = hidden_field_tag "invitation_code", params[:code]
+
+            -# Honey pot: hidden field to detect spammers
+            = form.label :input_again, "You should not see this field, if CSS is working. If you see this, please send feedback!", :class => "unwanted_text_field"
+            = form.text_field :input_again, :class => "unwanted_text_field", :id => "error_regristration_unwanted_email2", :autocomplete => "off"
+
+            .form-group.has-feedback
+              -# Email
+              = form.label :email, t('.email')
+              = form.email_field :email, :class => "form-control", :required=>""
+              %span.glyphicon.form-control-feedback
+
+            -# Name
+            .form-group.has-feedback
+              = form.label :given_name, t('.given_name')
+              = form.text_field :given_name, :class => "text_field form-control", :required=>"", :maxlength => "30"
+              %span.glyphicon.form-control-feedback
+              = form.label :family_name, t('.family_name')
+              = form.text_field :family_name, :class => "text_field form-control", :required=>"", :maxlength => "30"
+              %span.glyphicon.form-control-feedback
+            .form-group.has-feedback
+              -# Username
+              = form.label :username, username_label
+              = form.text_field :username, :class => "text_field form-control", :required=>"", :maxlength => "20", :id => "person_username1"
+              %span.glyphicon.form-control-feedback
+            .form-group.has-feedback
+              -# Password
+              = form.label :password, t('common.password')
+              = form.password_field :password, :class => "text_field form-control", :required=>"", :maxlength => "255", :id => "person_password1"
+              %span.glyphicon.form-control-feedback
+              = form.label :password2, t('.password_again')
+              = form.password_field :password2, :class => "text_field form-control", :required=>"", :maxlength => "255"
+              %span.glyphicon.form-control-feedback
+
+            -# Terms
+            .outer-checkbox-container
+              .checkbox-container
+                - unless @skip_terms_checkbox
+                  %input{:type => "checkbox", :id => "person_terms", :name => "person[terms]"}
+                  = form.label :terms, t('.i_accept_the'), :class => "checkbox"
+                  = link_to t(".terms"), "#", :tabindex => "-1", :id => "terms_link", :class => "form"
+
+            = form.hidden_field :consent, :value => @current_community.consent
+
+            / Sign Up button
+            #signup-button.btn-wrapper.btn-centered
+              %button.btn.btn-primary{:type => "submit"} Sign Up
+            / /.btn-wrapper
+            / Already registered? Log in
+            .registered-login
+              %p
+                Already registered?
+                = succeed "." do
+                  %a{:href => login_path, :title => "Sign In"} Sign in
+
+  = render :partial => "help_texts", :collection => ["terms", "help_invitation_code"], :as => :field

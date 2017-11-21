@@ -1,0 +1,13 @@
+.account-setup
+  %main
+    .container
+      = render "account_setup/shared/header", person: @person, progresses: @progresses, title: @title
+      / Form and card
+      .row.split-screen.form-wrapper
+        / Left column
+        #split-screen-left.col-md-6.split-screen-col.no-row-margins
+          .split-screen-col-inner
+            = render "account_setup/shared/step2_form", person: @person, countries: @countries, progresses: @progresses
+        #split-screen-right.col-md-6.split-screen-col
+          .split-screen-col-inner
+            = render "account_setup/shared/card", object: @person

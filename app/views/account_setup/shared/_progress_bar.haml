@@ -1,0 +1,14 @@
+#register-progress-wrapper.row
+  #progress-bar.col-md-12
+    #progress-bar-wrap
+      - @progresses[:items].each do |key, text|
+        %div{class: "progress-bar-unit #{progress_bar_item_state_class(@progresses, key)}"}
+          - if :"#{@progresses[:account_setup_step]}".to_s.to_i >= key.to_s.to_i
+            = link_to text, progress_bar_step_link(key, @person), data: {toggle: "tooltip", placement: "bottom", "data-original-title": "Edit" }, title: "Edit"
+          - else
+            = text
+          %i.fa.fa-check-circle{"aria-hidden" => "true"}
+        / Arrow
+        - if text != @progresses[:items][:"#{@progresses[:items].try(:count)}"]
+          .progress-bar-arrow
+            %i.fa.fa-long-arrow-right{"aria-hidden" => "true"}

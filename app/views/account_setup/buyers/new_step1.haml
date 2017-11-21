@@ -1,0 +1,28 @@
+.account-setup
+  %main
+    .container
+      = render "account_setup/shared/header", person: @person, progresses: @progresses, title: @title
+      / Form and card
+      .row.split-screen.form-wrapper
+        / Left column
+        #split-screen-left.col-md-6.split-screen-col
+          .split-screen-col-inner
+            = form_for @listing, url: buyer_account_setup_step2_path, 
+            method: :put, data: {toggle: "validator"} do |f|
+              / Name of the company
+              .form-group.has-feedback
+                %label{:for => "company-name"}
+                  = t("account_setup.buyer.step1.name_of_project")
+                  %span.required-mark *
+                = f.text_field :title, id: "company-name", class: "form-control", required: true
+                %span.glyphicon.form-control-feedback{"aria-hidden" => "true"}
+                .help-block.with-errors= t("account_setup.buyer.step1.how_your_project_should_be_named")
+              / /.form-group
+              #next-step-button.btn-wrapper.btn-centered
+                %button.btn.btn-primary.hvr-pop{:type => "submit"}= t("account_setup.buyer.next_step")
+              / /.btn-wrapper
+              / Steps visual guide
+              = render "account_setup/shared/bottom_progress_bar", progresses: @progresses, person: @person
+        #split-screen-right.col-md-6.split-screen-col
+          .split-screen-col-inner
+            = render "account_setup/shared/project_card", listing: @listing

@@ -1,0 +1,22 @@
+
+
+.message-panel.clearfix
+  / Avatar
+  .message-panel-avatar
+    %div
+      = image_tag(message_or_action[:sender][:avatar], :class => "roundedimage")
+  / /.message-panel-avatar
+  / Message
+  .message-panel-body
+    .msg-panel-wrap
+      %h4.msg-author.clearfix
+        = message_or_action[:sender][:username]
+        %span.msg-full-timestamp  
+          = time_ago(message_or_action[:created_at])
+      .msg-full
+        - text_with_line_breaks do
+          = message_or_action[:content]
+      / /.msg-full
+    / /.msg-panel-wrap
+  / /.message-panel-body
+/ /.message-panel

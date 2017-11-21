@@ -1,0 +1,121 @@
+= render partial: 'layouts/header_submenu', locals: header_props()
+.card-poster-edit
+  %section#project-poster-editor-toolbar
+    .container
+      .row
+        #ppe-wrap
+          .ppe-header
+            %h2 Card editor toolbar
+          / /.ppe-header
+          .ppe-actions-menu.clearfix
+            / Action group 1
+            %ul.ppe-action-group
+              %li.ppe-action
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-undo{"aria-hidden" => "true"}
+              %li.ppe-action.action-group-end
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-repeat{"aria-hidden" => "true"}
+            / /.ppe-action-group
+            / Action group 2
+            %ul.ppe-action-group
+              %li.ppe-action
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-pencil{"aria-hidden" => "true"}
+              %li.ppe-action
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-crop{"aria-hidden" => "true"}
+              %li.ppe-action
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-list{"aria-hidden" => "true"}
+              %li.ppe-action.action-group-end
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-paint-brush{"aria-hidden" => "true"}
+            / /.ppe-action-group
+            / Action group 3
+            %ul.ppe-action-group
+              %li.ppe-action
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-header{"aria-hidden" => "true"}
+              %li.ppe-action
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-text-height{"aria-hidden" => "true"}
+              %li.ppe-action
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-bold{"aria-hidden" => "true"}
+              %li.ppe-action
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-italic{"aria-hidden" => "true"}
+              %li.ppe-action.action-group-end
+                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+                  %i.fa.fa-underline{"aria-hidden" => "true"}
+              %li.ppe-done
+                %a.btn.btn-primary{:href => "#"} Done
+            / /.ppe-action-group
+          / /.ppe-actions-menu
+        / #ppe-wrap
+      / /.row
+    / /.container
+  / /#project-poster-editor-toolbar
+  / Card editor area
+  %section#main-content.poster-edit-wrap
+    .container
+      .row
+        #poster-canvas
+          / The card
+          .biz-card-wrapper
+            .biz-card-frame
+              .biz-card-inner-frame
+                / Worker Card Logo
+                .biz-card-logo
+                  .biz-card-logo-sizer
+                    %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Edit your picture or logo"}
+                      %img{:alt => "", :src => asset_path('/assets/avatar_examples/jobcie-avatar-300-bare.png')}/
+                  / /.biz-card-logo-sizer
+                / /.biz-card-logo
+                / Worker Card Desc
+                .biz-card-desc
+                  %h2.co-name
+                    %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                      My Worker Name
+                      %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                  %h3.co-location
+                    %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                      My location
+                      %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                  %h4.co-cat-skill
+                    %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                      My category | My skill
+                      %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                  %p.co-desc
+                    %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                      My description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a molestie nisl. Suspendisse iaculis enim eget lectus elementum rhoncus.
+                      %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                / /.biz-card-desc
+              / /.biz-card-inner-frame
+              / Promo pics (3)
+              .biz-card-promo-pix
+                .biz-card-promo-pix-wrap.clearfix
+                  / Image 1
+                  .biz-card-promo
+                    %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Edit promo picture"}
+                      %img{:alt => "", :src => asset_path('/assets/workerpromo1.jpg')}/
+                  / /.biz-card-promo
+                  / Image 2
+                  .biz-card-promo
+                    %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Edit promo picture"}
+                      %img{:alt => "", :src => asset_path('/assets/workerpromo2.jpg')}/
+                  / /.biz-card-promo
+                  / Image 3
+                  .biz-card-promo
+                    %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Edit promo picture"}
+                      %img{:alt => "", :src => asset_path('/assets/workerpromo3.jpg')}/
+                  / /.biz-card-promo
+                / /.biz-card-promo-pix-wrap
+              / /.biz-card-promo-pix
+            / /.biz-card-frame
+          / /.biz-card-wrapper
+        / /#poster-canvas
+      / /#poster-edit-wrap
+    / /.container
+  / /#main-content

@@ -1,0 +1,33 @@
+= form_for @listing, url: buyer_account_setup_step4_path, method: :put, data: {toggle: "validator"} do |f|
+  .account-signup-category-forms.account-setup-category
+    = f.fields_for :listing_skills, ListingSkill.new do |cf|
+      / Work Category
+      .form-group.has-feedback.parent-categories-1
+        %label{:for => "work-category"}
+          = t("account_setup.business.step3.work_category")
+          %span.required-mark *
+        = select_tag :parent_id, options_for_select(@current_community.top_level_categories.collect{|c| [c.display_name(I18n.locale), c.id]}, selected_category),
+          {:include_blank => t("account_setup.business.step3.select_category"),
+          class: "form-control skills-category-select", 
+          required: "true"}
+
+        .help-block.with-errors
+      / Skills/Expertise
+      .row
+        .col-md-12
+          .form-group.has-feedback.sub-categories-select
+            %label{:for => "skills"}
+              = t("account_setup.business.step3.subcategories")
+              %span.required-mark *
+              / = cf.select :category_id, 
+              /   options_for_select(options_for_buyer_skill_select(@listing), @listing.listing_skills.pluck(:category_id)),
+              /   {:include_blank => t("account_setup.business.step3.select_skills")}, 
+              /   {class: "form-control skills-category-select",
+              /   id: "work-category",
+              /   multiple: true}
+            .checkbox-list
+              = render "account_setup/shared/skills_checkboxes", listing: @listing, cf: cf, selected_category: selected_category
+            .help-block.with-errors
+      / Next Step button
+      #next-step-button.btn-wrapper.btn-centered
+        %button.btn.btn-primary.hvr-pop{:type => "submit"}=t("account_setup.business.next_step")

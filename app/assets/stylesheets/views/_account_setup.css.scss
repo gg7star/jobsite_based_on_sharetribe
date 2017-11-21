@@ -1,0 +1,167 @@
+@import "mixins/all";
+
+.signup-horizontal-line {
+  margin: lines(1.25) 0;
+  text-align: center;
+  position: relative;
+  font-variant: italic;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: solid 1px $border;
+  }
+}
+
+.signup-horizontal-line-text {
+  padding-left: lines(0.25);
+  padding-right: lines(0.25);
+  display: inline;
+  text-align: center;
+  background-color: white;
+  @include larger-type;
+  color: $light-body;
+  position: relative;
+}
+
+/**--Additional Styles for Registration pages--**/
+/**--Base styles are in job.css--**/
+
+.account-setup main {
+	background:#fff;
+	min-height:50em;
+	padding-top:6em;
+
+  .split-screen-col-inner {
+      padding: 0 4em;
+  }
+
+  .account-setup-content-wrapper {
+      padding: 0 7em;
+      margin-bottom: 4em;
+  }
+
+  .without-border-radious {
+    -webkit-border-radius: 0em;
+    -moz-border-radius: 0em;
+    -ms-border-radius: 0em;
+    -o-border-radius: 0em;
+     border-radius: 0em;
+  }
+
+  .no-row-margins {
+    .row {
+      margin-left: 0px !important; 
+      margin-right: 0px !important; 
+    }
+  }
+
+  .country-select-block {
+    margin-bottom: -18px;
+  }
+
+  .progress-bar-unit a {
+    color: #3c3c3c;
+    font-style: normal;
+  }
+
+  .steps-guide .step-indicators a { 
+    display: inline-block; 
+    width: 10px; 
+    height: 10px; 
+    margin: 4px; 
+    /*text-indent: -999px;*/
+    cursor: pointer; 
+    border-radius: 10px; 
+    border: 2px solid #d7d7d7; 
+    background-color: #d7d7d7;
+  }
+
+  .steps-guide .step-indicators a:hover {
+    border: 2px solid #55bc86; 
+    background-color: #55bc86; 
+  }
+
+  .steps-guide .step-indicators a.active {
+    border: 2px solid #55bc86; 
+    background-color: #55bc86; 
+  }
+
+  .upload-options {
+    .fields {
+      float: left;
+      text-align: center;   
+      margin-left: 20px;
+    }
+
+    a {
+      color: #a9a9a9;
+      font-size: 100%;
+    } 
+  }
+
+  .clearfix {
+    clear: both;
+  }
+
+
+  .has-feedback .form-control-feedback {
+    top: 30px;
+  }
+
+	.add-controls-wrap a {
+    padding: 0 0 0 0;
+    font-family: "Karla", sans-serif;
+    color: #424242;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 100%;
+		margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    font-family: "Karla", sans-serif;
+    color: #424242;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-transform: none;
+    margin: 1em 0;
+    padding: 0 0 0 0;
+
+		&:hover {
+			color:#8ec63f;
+		}
+	}
+
+  .account-setup-step6-content-wrapper {
+    padding: 0 7em;
+  }
+
+  #card_main_description .card-text {
+    font-family: "Karla", sans-serif;
+    color: #dcdcdc;
+    font-size: 100%;
+    font-weight: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .project-price a {
+    color: #fff;
+    font-family: "Karla", sans-serif;
+    font-weight: bold;
+    font-size: 100%;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .project-price {
+    color: #fff;
+    font-family: "Karla", sans-serif;
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: center;
+    margin: 0 0 20px;
+  }
+}

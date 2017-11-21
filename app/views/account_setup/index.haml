@@ -1,0 +1,39 @@
+.account-setup
+  %main
+    .container
+      .row
+        .col-md-8.col-md-offset-2.register-content-title
+          %h1.with-subtitle=t(".welcome", name: @current_user.full_name)
+          %p.subtitle
+            =t(".you_successfully_created")
+            
+            %br/
+            =t(".now_you_proceed_to_next_step")
+        / /.register-content-title
+      / /.row
+      #completed-form.row.form-wrapper
+        .col-md-6.col-md-offset-3.account-setup-content-wrapper.btn-options
+          %form
+            .button-options-wrap
+              / Register as a worker
+              .btn-wrapper.btn-centered
+                = link_to t(".register_as_worker"), worker_account_setup_step1_path, title: t(".register_as_worker"), class: "btn btn-primary hvr-pop"
+              / /.btn-wrapper
+              / Register as a business
+              .btn-wrapper.btn-centered
+                = link_to t(".register_as_business"), business_account_setup_step1_path, title: t(".register_as_business"), class: "btn btn-primary hvr-pop"
+              / /.btn-wrapper
+            / /.button-options-wrap
+            .lined-heading
+              %h3
+                %span.line-left>  
+                = t(".or")
+                %span.line-right  
+            / /.lined-heading
+            / Post a project
+            #signup-button.btn-wrapper.btn-centered
+              = link_to t(".post_as_project"), buyer_account_setup_step1_path, title: t(".post_as_project"), class: "btn btn-primary hvr-pop"
+            / /.btn-wrapper
+        / /.register-content-wrapper
+      / /.row
+    / /.container

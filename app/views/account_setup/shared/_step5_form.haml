@@ -1,0 +1,22 @@
+= nested_form_for @person, url: (@person.kind_of?(Business) ? business_account_setup_step6_path : worker_account_setup_step6_path), method: :put, data: {toggle: "validator"} do |f|
+  / Upload picture or video
+  #upload-button-wrapper.btn-wrapper.btn-centered.upload-company-logo
+    %p.advice-text=t("account_setup.business.step5.upload_to_promote")
+    = f.link_to_add :images, "data-target" => ".upload-options" do
+      .fileUpload.btn.btn-upload
+        %span=t("account_setup.business.browse")
+        %input.upload{:type => "file"}/
+      
+    .upload-options
+      = f.fields_for :images do |fi|
+        = fi.file_field :image, class: "hide file_promoupload"
+        = fi.link_to_remove "x picture", :class => "promo_image_remove"
+    .clearfix
+    / /.upload-options
+  / /#upload-button
+  / Next Step button
+  #next-step-button.btn-wrapper.btn-centered
+    %button.btn.btn-primary.hvr-pop{:type => "submit"}=t("account_setup.business.step5.register")
+  / /.btn-wrapper
+  / Steps visual guide
+  = render "account_setup/shared/bottom_progress_bar", progresses: @progresses, person: @person

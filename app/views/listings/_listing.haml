@@ -1,0 +1,15 @@
+.project-block.clearfix
+  .project-inner
+    .hovereffect
+      = image_tag "project-placeholder1.jpg"
+      .overlay
+        %ul.icon-links
+          %li
+            %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "View full project profile"}
+              %span.fa.fa-search
+          %li
+            = link_to offers_path(listing_id: listing.id, person_id: listing.author.username), data: {placement: "top", toggle: "tooltip"}, title: t("listings.index.contact_project_manager"), method: :post do
+              %span.fa.fa-comment-o
+          %li
+            %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Dismiss this project"}
+              %span.fa.fa-times

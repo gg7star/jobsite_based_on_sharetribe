@@ -1,0 +1,51 @@
+#search-filters-sidebar
+  %h3#criteria-header Your search filters
+  %form
+    / Category
+    .search-filter
+      .form-group
+        %label{:for => "searchCategory"} Category
+        %input#searchCategory.form-control{:placeholder => "Select category", :type => "text"}/
+      / /.form-group
+      .selected-list
+        %ul
+          %li
+            %a{:href => "#"}
+              %i.fa.fa-times{"aria-hidden" => "true"}
+              Construction
+      / /.selected-list
+    / /.search-filter
+    / Skills
+    .search-filter
+      .form-group
+        %label{:for => "searchSkills"} Skills
+        %input#searchSkills.form-control{:placeholder => "Select skill", :type => "text"}/
+      / /.form-group
+      .selected-list
+        %ul
+          %li
+            %a{:href => "#"}
+              %i.fa.fa-times{"aria-hidden" => "true"}
+              Skill 1
+          %li
+            %a{:href => "#"}
+              %i.fa.fa-times{"aria-hidden" => "true"}
+              Skill 2
+      / /.selected-list
+    / /.search-filter
+    / Location
+    .search-filter
+      .form-group
+        %label{:for => "searchLocation"} Location
+        %input#searchLocation.form-control{:placeholder => "Select location", :type => "text"}/
+      / /.form-group
+      .selected-list
+        %ul
+          %li
+            %a{:href => "#"}
+              %i.fa.fa-times{"aria-hidden" => "true"}
+              Montreal
+          %li
+            %a{:href => "#"}
+              %i.fa.fa-times{"aria-hidden" => "true"}
+              Germany

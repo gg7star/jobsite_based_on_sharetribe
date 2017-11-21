@@ -1,0 +1,4 @@
+- listings.each_slice(2) do |slice|
+  .project-blocks-row.clearfix
+    - slice.each do |l|
+      = render "listings/listing", listing: l

@@ -1,0 +1,45 @@
+
+.modal-dialog{:role => "document"}
+  .modal-content
+    .modal-header
+      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+      %h4#clientsModalLabel.modal-title
+        %i.fa.fa-handshake-o.fa-fw{"aria-hidden" => "true"}
+        #{statuslist.count} clients online
+    / /.modal-header
+    / Online clients list
+    .modal-body.online-profiles
+      - if statuslist.any?
+        - statuslist.each  do |omp|         
+          / Online 1
+          .omp-profile-wrap
+            .online-mini-profile.clearfix
+              .omp-img
+                %a{:href => "#", :title => "#{omp[:name]}"}
+                  %img.roundedimage{:alt => "", :src => asset_path("#{omp[:avatar_url]}")}/
+              / /.omp-img
+              .omp-summary
+                %article
+                  %h2.clearfix
+                    %a{:href => "#", :title => "#{omp[:name]}"} #{omp[:name]}
+                    %span
+                      You last connected:
+                      %em #{omp[:last_connected]}
+                  %p.hire-summary 
+                    #{omp[:name]} hired you for:
+                    %a{:href => "#{omp[:project_url]}"} #{omp[:project_title]}
+                  %p.connection-excerpt
+                    %a{:href => "#{omp[:message_url]}"}
+                      #{omp[:name]} wrote:
+                      %span.msg-wrap #{omp[:last_message]}
+                      %span.messages-link Go to messages »
+              / /omp-summary
+            / /.online-mini-profile
+      - else
+        %p There's no other parties online.
+      / /.omp-profile-wrap
+    / /.modal-body
+  / /.modal-content
+/ /.modal-dialog
+/ #clientsModal

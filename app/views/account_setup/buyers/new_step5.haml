@@ -1,0 +1,56 @@
+.account-setup
+  %main
+    .container
+      = render "account_setup/shared/header", person: @person, progresses: @progresses, title: @title
+      / Form and card
+      .row.split-screen.form-wrapper
+        / Left column
+        #split-screen-left.col-md-6.split-screen-col.no-row-margins
+          .split-screen-col-inner
+            = nested_form_for @listing, url: buyer_account_setup_step6_path, method: :put, data: {toggle: "validator"} do |f|
+              / Upload picture or video
+              #upload-button-wrapper.btn-wrapper.btn-centered.upload-company-logo
+                %p.advice-text=t("account_setup.business.step5.upload_to_promote")
+                = f.link_to_add :listing_images, "data-target" => ".upload-options" do
+                  .fileUpload.btn.btn-upload
+                    %span=t("account_setup.business.browse")
+                    %input.upload{:type => "file", :id => "logo_upload_btn"}
+                  
+                .upload-options
+                  = f.fields_for :listing_images do |fi|
+                    = fi.file_field :image, class: "hide file_preupload"
+                    = fi.link_to_remove "x picture", :class => "image_remove" 
+                .clearfix
+                .row
+                  .col-md-8
+                    .form-group.has-feedback
+                      %label{:for => "budget"}
+                        Your budget
+                        %span.required-mark *
+                      / [0..-4] remove ",00" from the price. We only accept full numbers as price
+                      = f.number_field :price_cents, value: Money.new(@listing.price_cents, @listing.currency).to_s[0..-4],
+                        class: "form-control", id: "main_project_price_input", required: true
+                      %span.glyphicon.form-control-feedback{"aria-hidden" => "true"}
+                      .help-block.with-errors How much are you willing to spend?
+                  .col-md-4
+                    .form-group.has-feedback
+                      %label{:for => "currency"}
+                        Currency
+                        %span.required-mark *
+                      = f.select :currency, options_for_select(Money::Currency.all.collect{|c| [c.iso_code, c.id]}, @listing.currency),
+                        {:include_blank => t("account_setup.business.step3.select_category")},
+                        {required: true,
+                        class: "form-control skills-category-select", 
+                        id: "currency"}
+                      .help-block.with-errors
+                / /.upload-options
+              / /#upload-button
+              / Next Step button
+              #next-step-button.btn-wrapper.btn-centered
+                %button.btn.btn-primary.hvr-pop{:type => "submit"}=t("account_setup.business.step5.register")
+              / /.btn-wrapper
+              / Steps visual guide
+              = render "account_setup/shared/bottom_progress_bar", progresses: @progresses, person: @person
+        #split-screen-right.col-md-6.split-screen-col
+          .split-screen-col-inner
+            = render "account_setup/shared/project_card", listing: @listing

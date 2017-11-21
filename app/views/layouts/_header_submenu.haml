@@ -1,0 +1,219 @@
+- if logged_in
+  .header_submenu
+    %section#submenu-tier
+      .container
+        .row
+          #submenu-wrap
+            / Submenu links
+            #dashboard-menu.submenu-links-wrap
+              %ul#submenu-links.clearfix
+
+                - if request.url == listings_url
+                  %li#dash-head 
+                    = link_to homepage_with_locale_path do
+                      %i.fa.fa-id-card-o{"aria-hidden" => "true", "data-original-title" => "Worker/Business", "data-placement" => "top", "data-toggle" => "tooltip", :title => ""}
+                    FIND A PROJECT
+                - else
+                  %li#dash-head My Dashboard
+
+            / /.submenu-links-wrap
+            / Searchbar
+            #loggedin-status-bar.widget.clearfix
+              %ul.loggedin-status
+                %li.user-visibility.user-viz-visible
+                  %i.fa.fa-user-circle-o.fa-fw{"aria-hidden" => "true"}
+                  %a{"data-toggle" => "modal", :href => "#visibilityModal"}
+                    You are Visible
+                    %span.change-viz change
+                %li.visible.status-teammates
+                  %i.fa.fa-users.fa-fw{"aria-hidden" => "true"}
+                  %a{"data-toggle" => "modal", :href => "#teammatesModal"} 3 teammates online
+                %li.visible.status-clients
+                  %i.fa.fa-handshake-o.fa-fw{"aria-hidden" => "true"}
+                  %a{href: '#', onclick: 'other_party_online_dialog()'} 
+                    / "data-toggle" => "modal", :href => "#clientsModal"
+                    = "#{online_party_count} clients online"
+            / /#loggedin-status-bar
+          / #submenu-wrap
+        / /.row
+      / /.container
+    / /#submenu-tier
+    / Clients Modal
+    #clientsModal.modal.fade.online-status-modal{"aria-labelledby" => "clientsModalLabel", :role => "dialog", :tabindex => "-1"}
+    / = render partial: 'layouts/submenu/connection_online_status', locals: {online_party_count: online_party_count}
+    / Teammates Modal
+    #teammatesModal.modal.fade.online-status-modal{"aria-labelledby" => "teammatesModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog{:role => "document"}
+        .modal-content
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4#teammatesModalLabel.modal-title
+              %i.fa.fa-users.fa-fw{"aria-hidden" => "true"}
+              3 teammates online
+          / /.modal-header
+          / Online teammates list
+          .modal-body.online-profiles
+            / Online 1
+            .omp-profile-wrap
+              .online-mini-profile.clearfix
+                .omp-img
+                  %a{:href => "#", :title => "John Doe"}
+                    %img.roundedimage{:alt => "", :src => asset_path('/assets/avatar_examples/commenter.jpg')}/
+                / /.omp-img
+                .omp-summary
+                  %article
+                    %h2.clearfix
+                      %a{:href => "#", :title => "John Doe"} John Doe
+                      %span
+                        You last connected:
+                        %em Dec 12 2016
+                    %p.connection-excerpt
+                      %a{:href => "messages-worker.html"}
+                        John wrote:
+                        %span.msg-wrap 'Hey, I wondered how the mockups were coming along? Ping me when you're ready to discuss next steps and I will review the plan from...'
+                        %span.messages-link Go to messages »
+                / /omp-summary
+              / /.online-mini-profile
+            / /.omp-profile-wrap
+            / Online 2
+            .omp-profile-wrap
+              .online-mini-profile.clearfix
+                .omp-img
+                  %a{:href => "#", :title => "John Doe"}
+                    %img.roundedimage{:alt => "", :src => asset_path('/assets/avatar_examples/commenter2.jpg')}/
+                / /.omp-img
+                .omp-summary
+                  %article
+                    %h2.clearfix
+                      %a{:href => "#", :title => "John Doe"} Janice Doe
+                      %span
+                        You last connected:
+                        %em Dec 8 2016
+                    %p.connection-excerpt
+                      %a{:href => "messages-worker.html"}
+                        You wrote:
+                        %span.msg-wrap 'I'm still waiting for sign-off from client on the initial designs, then I can forward to you their evaluation on...'
+                        %span.messages-link Go to messages »
+                / /omp-summary
+              / /.online-mini-profile
+            / /.omp-profile-wrap
+            / Online 3
+            .omp-profile-wrap
+              .online-mini-profile.clearfix
+                .omp-img
+                  %a{:href => "#", :title => "John Doe"}
+                    %img.roundedimage{:alt => "", :src => asset_path('/assets/avatar_examples/commenter3.jpg')}/
+                / /.omp-img
+                .omp-summary
+                  %article
+                    %h2.clearfix
+                      %a{:href => "#", :title => "John Doe"} Zack Smith
+                      %span
+                        You last connected:
+                        %em Dec 3 2016
+                    %p.connection-excerpt
+                      %a{:href => "messages-worker.html"}
+                        Zack wrote:
+                        %span.msg-wrap 'Hey, I wondered how the mockups were coming along? Ping me when you're ready to discuss next steps and I will review the plan from...'
+                        %span.messages-link Go to messages »
+                / /omp-summary
+              / /.online-mini-profile
+            / /.omp-profile-wrap
+          / /.modal-body
+        / /.modal-content
+      / /.modal-dialog
+    / #teammatesModal
+
+    / Visibility Modal (Visible)
+    #visibilityModal.modal.fade.online-status-modal{"aria-labelledby" => "visibilityModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog{:role => "document"}
+        .modal-content.viz-modal-visible
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            %h4#visibilityModalLabel.modal-title
+              %i.fa.fa-user-circle.fa-fw{"aria-hidden" => "true"}
+              %span You are Visible
+          / /.modal-header
+          / Online teammates list
+          .modal-body.viz-modal
+            %h5 Your clients and teammates will see that you are online
+            / Change visibility options
+            .viz-options-wrap.clearfix
+              %ul
+                / Visible
+                %li
+                  %a.clearfix.viz-visible{:onclick => "set_online_status('online')", :href => '#'}
+                    / Viz icon
+                    .viz-icon-wrap
+                      %article
+                        %h2
+                          %i.fa.fa-user-circle.fa-fw{"aria-hidden" => "true"}
+                    / /.viz-icon-wrap
+                    / Viz desc
+                    .viz-icon-desc
+                      %article
+                        %h3
+                          Go
+                          %span.viz-status Visible
+                        %p Your clients and teammates will see that you are online
+                    / /.viz-icon-desc
+                / Invisible
+                %li
+                  %a.clearfix.viz-invisible{:onclick => "set_online_status('offline')", :href => '#'}
+                    / Viz icon
+                    .viz-icon-wrap
+                      %article
+                        %h2
+                          %i.fa.fa-user-circle-o.fa-fw{"aria-hidden" => "true"}
+                    / /.viz-icon-wrap
+                    / Viz desc
+                    .viz-icon-desc
+                      %article
+                        %h3
+                          Go
+                          %span.viz-status Invisible
+                        %p Your clients and teammates will not see that you are online
+                    / /.viz-icon-desc
+                / Away
+                %li
+                  %a.clearfix.viz-away{:onclick => "set_online_status('away')", :href => '#'}
+                    / Viz icon
+                    .viz-icon-wrap
+                      %article
+                        %h2
+                          %i.fa.fa-user-circle.fa-fw{"aria-hidden" => "true"}
+                    / /.viz-icon-wrap
+                    / Viz desc
+                    .viz-icon-desc
+                      %article
+                        %h3
+                          Go
+                          %span.viz-status Away
+                        %p Your clients and teammates will see that you are away
+                    / /.viz-icon-desc
+                / Be Right Back
+                %li
+                  %a.clearfix.viz-brb{:onclick => "set_online_status('brb')", :href => '#'}
+                    / Viz icon
+                    .viz-icon-wrap
+                      %article
+                        %h2
+                          %i.fa.fa-user-circle.fa-fw{"aria-hidden" => "true"}
+                    / /.viz-icon-wrap
+                    / Viz desc
+                    .viz-icon-desc
+                      %article
+                        %h3
+                          Go
+                          %span.viz-status Be Right Back
+                        %p Your clients and teammates will see that you'll be back soon
+                    / /.viz-icon-desc
+            / /.viz-options-wrap
+          / /.modal-body.viz-modal
+        / /.modal-content
+      / /.modal-dialog
+    / #visibilityModal
+- content_for :javascript do
+  online_callback('#{online_status}');

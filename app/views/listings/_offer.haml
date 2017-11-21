@@ -1,0 +1,196 @@
+/ Offer panel 1
+.offer-wrapper
+  .offer-panel.clearfix
+    / Actions toolbar
+    .offer-panel-actions-toolbar.clearfix
+      .offer-panel-actions
+        / Reviews link
+        .worker-reviews-link
+          .wrl-inner
+            / Reviews count
+            %ul.worker-reviews-count
+              / Worker reviews count
+              %li.worker-reviews-count-icon
+                %a{"data-original-title" => "15 'Excellent' reviews", "data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => ""}
+                  %span.fa-stack.fa-lg
+                    %i.fa.fa-circle.fa-stack-2x
+                    %i.fa.fa-trophy.fa-stack-1x.fa-inverse
+              %li.worker-reviews-count-no
+                %span.badge 0
+            / /.worker-reviews-count
+            / Read reviews button
+            .read-reviews-btn-wrapper.clearfix
+              %a.btn.btn-read.hvr-pop{"data-target" => "#workerProfile#{offer.business_or_worker.id}", "data-toggle" => "modal", :href => "#"}
+                Read reviews
+                %i.fa.fa-window-restore{"aria-hidden" => "true"}
+            / /.read-reviews-btn-wrapper
+          / /.wrl-inner
+        / /.worker-reviews-link
+        / Offer actions buttons
+        .offer-actions-buttons
+          .oab-inner
+            / Offer actions
+            %ul.offer-actions
+              / Dialogue
+              %li
+                %a{"data-original-title" => "Respond to this offer", "data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "", href: "#{offers_accept_path(id: offer.id)}"}
+                  %span.fa-stack.fa-lg
+                    %i.fa.fa-circle.fa-stack-2x
+                    %i.fa.fa-comment-o.fa-stack-1x.fa-inverse
+              / Close/Dismiss
+              %li
+                %a{"data-original-title" => "Dismiss this offer", "data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => ""}
+                  %span.fa-stack.fa-lg
+                    %i.fa.fa-circle.fa-stack-2x
+                    %i.fa.fa-times.fa-stack-1x.fa-inverse
+            / /.offer-actions
+          / /.oab-inner
+        / /.offer-actions-buttons
+      / /.offer-panel-actions
+    / /.offer-panel-actions-toolbar
+    / Offer profile
+    .offer-profile.clearfix
+      / Offer profile image
+      .offer-profile-img-wrap
+        .img-sizer
+          %a{:href => "#"}
+            = image_tag offer.business_or_worker.image.url(:medium), class: "roundedimage"
+        / /.img-sizer
+      / /.offer-profile-img-wrap
+      / Offer profile summary
+      .offer-profile-summary
+        %article
+          / Name and location
+          %h2.offer-profile-name
+            %a{:href => "#"}= offer.business_or_worker.full_name
+          %h3.offer-profile-location= offer.business_or_worker.full_location
+          / Category and skill
+          %p.offer-profile-category
+            - offer.business_or_worker.skills.each do |s|
+              %a{:href => "#"}=s.category.parent.display_name(I18n.locale)
+              |
+              %a{:href => "#"}=s.category.display_name(I18n.locale)
+              %br
+          %p.offer-preview
+            = offer.business_or_worker.description
+
+/
+/ MODAL STARTS HERE
+/
+.modal.fade{"aria-labelledby" => "workerProfile1Label", :role => "dialog", :tabindex => "-1", id: "workerProfile#{offer.business_or_worker.id}"}
+  .modal-dialog.modal-lg{:role => "document"}
+    .modal-content.modal-profile-preview
+      / Worker header
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#workerProfile1Label.modal-title
+          %img.logo{:alt => "", :src => "images/logo.png"}/
+          Worker preview
+      / /.modal-header
+      / Profile preview
+      .modal-body.profile-preview
+        .modal-content-wrap.clearfix
+          / Reviews, preview
+          .reviews-preview-wrap
+            .reviews-body
+              / Reviews summary (icons) and profile preview actions
+              .reviews-top-tier.clearfix
+                / Reviews summary (icons)
+                .reviews-icon-summary.clearfix
+                  %ul
+                    / Thumbs down
+                    %li.review-summary-wrap{"data-original-title" => "Very Poor", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => ""}
+                      .review-summary-number 0
+                      .review-summary-icon
+                        %i.fa.fa-thumbs-down.fa-fw{"aria-hidden" => "true"}
+                    / Meh
+                    %li.review-summary-wrap{"data-original-title" => "Poor", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => ""}
+                      .review-summary-number 0
+                      .review-summary-icon
+                        %i.fa.fa-meh-o.fa-fw{"aria-hidden" => "true"}
+                    / Thumbs Up
+                    %li.review-summary-wrap{"data-original-title" => "Good", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => ""}
+                      .review-summary-number 0
+                      .review-summary-icon
+                        %i.fa.fa-thumbs-up.fa-fw{"aria-hidden" => "true"}
+                    / Awesome
+                    %li.review-summary-wrap{"data-original-title" => "Excellent", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => ""}
+                      .review-summary-number 0
+                      .review-summary-icon
+                        %i.fa.fa-trophy.fa-fw{"aria-hidden" => "true"}
+                / /.reviews-icon-summary
+                / Profile preview actions
+                .profile-preview-actions-wrap.clearfix
+                  / Offer actions
+                  %ul.offer-actions
+                    / Close/Dismiss
+                    %li
+                      %a{"data-original-title" => "Dismiss this offer", "data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => ""}
+                        %span.fa-stack.fa-lg
+                          %i.fa.fa-circle.fa-stack-2x
+                          %i.fa.fa-times.fa-stack-1x.fa-inverse
+                    / Dialogue
+                    %li
+                      %a{"data-original-title" => "Respond to this offer", "data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => ""}
+                        %span.fa-stack.fa-lg
+                          %i.fa.fa-circle.fa-stack-2x
+                          %i.fa.fa-comment-o.fa-stack-1x.fa-inverse
+                  / /.offer-actions
+                / /.profile-preview-actions-wrap
+              / /.reviews-top-tier
+              / Reviews preview header
+              .reviews-preview-header.clearfix
+                %h4
+                  Customer Reviews:
+                  %span Preview
+              / /.reviews-preview-header
+              / Reviews stack
+              .reviews-preview-stack.clearfix
+                .review-preview-wrapper
+                  / Review summary, at a glance
+                  %ul.reviewer-preview-summary.clearfix
+                    %li.reviewer-name John D.
+                    %li.reviewer-icon
+                      %i.fa.fa-thumbs-up{"aria-hidden" => "true"}
+                    %li.reviewer-date December 31, 2016
+                  %p.customer-review-preview-text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id imperdiet neque, et imperdiet ipsum. Donec sed lacus nunc. Ut id lacinia tortor. Pellentesque varius iaculis metus nec gravida. Praesent laoreet tortor nibh.
+                / /.review-preview-wrapper
+                .review-preview-wrapper
+                  / Review summary, at a glance
+                  %ul.reviewer-preview-summary.clearfix
+                    %li.reviewer-name Jane D.
+                    %li.reviewer-icon
+                      %i.fa.fa-meh-o{"aria-hidden" => "true"}
+                    %li.reviewer-date December 12, 2016
+                  %p.customer-review-preview-text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id imperdiet neque, et imperdiet ipsum. Donec sed lacus nunc. Ut id lacinia tortor...
+                / /.review-preview-wrapper
+              / /.reviews-preview-stack
+            / /.reviews-body
+          / /.reviews-preview-wrap
+          / Worker summary
+          .worker-summary-wrap
+            / Worker name and location
+            %h3.modal-worker-summary-name=offer.business_or_worker.full_name
+            %h4.modal-worker-summary-location=offer.business_or_worker.full_location
+            / Worker image
+            .worker-summary-img-wrap
+              = image_tag offer.business_or_worker.image.url(:medium), class: "roundedimage"
+            / /.worker-summary-img-wrap
+            / Category and skill
+            .worker-summary-category-skill
+              %ul
+                - offer.business_or_worker.skills.each do |s|
+                  %li.worker-summary-category=s.category.parent.display_name(I18n.locale)
+                  %li.worker-summary-skill=s.category.display_name(I18n.locale)
+            / /.worker-summary-category-skill
+          / /.worker-summary-wrap
+        / /.modal-content-wrap
+      / /.modal-body profile-preview
+      / Profile preview actions
+      .modal-footer
+        %button.btn.btn-close{"data-dismiss" => "modal", :type => "button"} Close
+        %button.btn.btn-primary{:type => "button"} View full profile
+      / /.modal-footer
+    / /.modal-content
+  / /.modal-dialog modal-lg

@@ -1,0 +1,29 @@
+.account-setup
+  %main
+    .container
+      #register-title-wrapper.row
+        #continued.col-md-8.col-md-offset-2.register-content-title
+          %h1
+            = @title
+          %br
+          %p.subtitle
+            = t("account_setup.business.step6.you_successfully_created")
+      = render "account_setup/shared/progress_bar", person: @person, progresses: @progresses
+
+      #completed-form.row.form-wrapper
+        .col-md-6.col-md-offset-3.register-content-wrapper.btn-options
+          %form
+            .button-options-wrap
+              / Register as a worker
+              .btn-wrapper.btn-centered.btn-jobcie
+                %a.btn.btn-primary.hvr-pop{:href => "/"} 
+                  = t("account_setup.business.step6.go_my_business")
+              / /.btn-wrapper
+              / Register as a business
+              .btn-wrapper.btn-centered.btn-facebook.btn-registered
+                %button.btn.btn-primary.hvr-pop{:type => "submit"}
+                  %i.fa.fa-facebook-official{"aria-hidden" => "true"}
+                  = t("account_setup.business.step6.share_fb")
+              / /.btn-wrapper
+            / /.button-options-wrap
+        / /.register-content-wrapper

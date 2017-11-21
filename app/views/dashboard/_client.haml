@@ -1,0 +1,234 @@
+= render partial: 'layouts/header_submenu', locals: header_props()
+%section.dashboard
+  #main-content.inbox-with-submenu
+    .container
+      #inbox-wrap.row
+        / Inbox, sidebar
+        #inbox-right-sidebar.col-md-2.col-sm-4.sidebar.xs-margin-top-ten.clearfix
+          .profile-overview.clearfix
+            %h2
+              My Profile
+              %a{:href => "card-poster-editor.html"}
+                %i.fa.fa-search-plus{"aria-hidden" => "true"}>
+                View
+            %ul.profile-header
+              %li
+                %a#profile-name-sidebar{:href => "#"}
+                  %img.roundedimage{:alt => "", :height => "90", :src => "/assets/avatar_examples/avatar-90.jpg", :width => "90"}/
+                  %span.profile-name-txt Jane Doe
+                / Offers summary
+                %a.offers-summary{:href => "active-projects-client.html", :title => "My Active Projects"} 2 projects posted
+                %a.offers-summary{:href => "new-offers-client.html", :title => "My Received Offers"}<
+                  11 received proposals
+                  %span.menu-new 2 new
+                %a.offers-summary{:href => "messages-project.html", :title => "My Messages"} 3 active hires
+            / /.profile-header
+          / /.profile-overview
+          .category-overview.clearfix
+            %h2
+              My Project
+              %br>/
+              Categories
+              %span  
+              %a{:href => "#"}
+                %i.fa.fa-pencil-square{"aria-hidden" => "true"}>
+                Edit
+            %ul.dash-cat-overview
+              %li
+                %a{:href => "#"} Entertainment
+              %li
+                %a{:href => "#"} Professional
+            / /.dash-cat-overview
+          / /.profile-overview
+        / /#inbox-right-sidebar
+        / Inbox, main content (floats right)
+        #inbox-main-col.col-md-10.col-sm-8
+          %article
+            .project-blocks-row.clearfix
+              / Find Work
+              .project-block
+                .dashboard-action-block.clearfix
+                  .dashboard-action
+                    %h2 Find Workers
+                    #dashboard-job-search.widget
+                      %form
+                        %i.fa.fa-search.close-search.search-button
+                        %input.search-input{:name => "search", :placeholder => "Enter job keywords", :type => "text"}/
+                      .advanced-search-prompt
+                        %p
+                          %a{:href => "search-client.html"} Advanced search
+                      / /.advanced-search-prompt
+                    / /#dashboard-job-search
+                    .category-filter
+                      %h3.dashboard-subtitle Browse Workers by Categories
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "#"} Education (802 workers)
+                        %li
+                          %a{:href => "#"} Home Help (623 workers)
+                        %li
+                          %a{:href => "#"} Field Project (1,113 workers)
+                        %li.all-cats
+                          %a{:href => "#"} See all categories »
+                    / /.category-filter
+                  / /.dashboard-action
+                / /.dashboard-action-block
+              / /.project-block
+              / Manage Work
+              .project-block
+                .dashboard-action-block.clearfix
+                  .dashboard-action
+                    %h2 Manage Workers
+                    .dash-inbox-overview
+                      %h3.dashboard-subtitle Inbox
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => conversations_path} New Messages (#{unread_count})
+                        %li
+                          %a{:href => "#"} New Project Proposals (4)
+                        %li
+                          %a{:href => "#"} Declined Project Invites (2)
+                    / /.dash-inbox-overview
+                    .dash-inbox-overview
+                      %h3.dashboard-subtitle Sent
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "#"} Project Invites Awaiting Response (2)
+                    / /.dash-inbox-overview
+                    .dash-inbox-overview
+                      %h3.dashboard-subtitle Feedback
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "feedback-project.html"} Helen Grundy has left you project feedback
+                          %span.timestamp 30m ago
+                        %li
+                          %a{:href => "feedback-project.html"} Dave James has left you project feedback
+                          %span.timestamp 3 days ago
+                    / /.dash-inbox-overview
+                  / /.dashboard-action
+                / /.dashboard-action-block
+              / /.project-block
+            / /.project-blocks-row
+            .project-blocks-row.clearfix
+              / Manage My Account
+              #dashboard-account-mgmt.project-block
+                .dashboard-action-block.clearfix
+                  .dashboard-action
+                    %h2 Manage My Account
+                    .account-action-block
+                      %h3.dashboard-subtitle My Settings
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-lock.fa-fw{"aria-hidden" => "true"}
+                            Change Password
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-id-card.fa-fw{"aria-hidden" => "true"}
+                            Change My Personal Details
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-usd.fa-fw{"aria-hidden" => "true"}
+                            Change Primary Currency
+                    / /.account-action-block
+                    .account-action-block
+                      %h3.dashboard-subtitle Help and Support
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-question-circle.fa-fw{"aria-hidden" => "true"}
+                            Search FAQ
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-users.fa-fw{"aria-hidden" => "true"}
+                            Contact Support
+                    / /.account-action-block
+                  / /.dashboard-action
+                / /.dashboard-action-block
+              / /.project-block
+              / Card Editor
+              #dashboard-poster-mgmt.project-block
+                .dashboard-action-block.clearfix
+                  .dashboard-action
+                    %h2 My Project Poster
+                    / Project Card
+                    #project-poster-dashboard.landing-page-card-wrap.clearfix
+                      / Project Card
+                      .project-card-wrapper
+                        .project-card-frame
+                          / JC pin
+                          .pin-tier
+                            .pin-grip
+                              %img{:alt => "", :src => "/assets/jcpin.png"}/
+                            / /.pin-grip
+                          / /.pin-tier
+                          / Title column (left) and location and picture column (right)
+                          .project-card-tier1.clearfix
+                            / Project Name
+                            .project-name-wrap
+                              %article
+                                %h2.project-poster-title
+                                  %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                                    Project Name 
+                                    %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                                %p.project-price
+                                  %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                                    Project Price
+                                    %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                                / Tier 2
+                                .project-image-tile-100.clearfix
+                                  %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "s#", :title => "Edit"}
+                                    %img{:alt => "", :src => "/assets/gardenshed3.jpg"}/
+                                / /.project-image-tile-tier
+                            / /.project-name-wrap
+                            / Project Location and pictures
+                            .project-location-pictures-wrap
+                              %article
+                                %h3.project-location
+                                  %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                                    Project Location
+                                    %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                                / Project image tiles
+                                .project-image-tile-wrap.clearfix
+                                  / Tier 1
+                                  .project-image-tile-tier.clearfix
+                                    / Project Image Tile (50% wide)
+                                    .project-image-tile-50
+                                      %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                                        %img{:alt => "", :src => "/assets/gardenshed1.jpg"}/
+                                    / /.project-image-tile
+                                    / Project Image Tile (50% wide)
+                                    .project-image-tile-50
+                                      %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                                        %img{:alt => "", :src => "/assets/gardenshed2.jpg"}/
+                                    / /.project-image-tile
+                                  / /.project-image-tile-tier
+                                / /.project-image-tile-wrap
+                                / Project description
+                                .project-card-desc-wrap
+                                  %p
+                                    %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "submit-project4.html", :title => "Edit"}
+                                      Project description. Nullam feugiat neque quis dolor blandit, ut ultricies justo tincidunt. Integer blandit aliquet eros eu dapibus. Mauris pretium gravida dui, at finibus velit tristique vitae. Duis eu massa euismod, vestibulum sapien vel, mollis odio. In hac habitasse platea dictumst. Donec leo leo, dignissim vel nunc id, fermentum imperdiet neque.
+                                      %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                                / /.project-card-desc-wrap
+                                / JobCIE signature logo
+                                .jobcie-signature
+                                  %img{:alt => "", :src => "/assets/logos/header/default.png"}/
+                                / /.jobcie-signature
+                            / /.project-location-pictures-wrap
+                          / /.project-card-tier1
+                        / /.project-card-frame
+                      / /.project-card-wrapper
+                      / Edit card button
+                      .btn-wrapper.edit-card-button.btn-ralign
+                        %a.btn.btn-primary.hvr-pop{:href => "project-poster-editor-saved.html"} Edit your project poster
+                      / /.btn-wrapper
+                    / /.landing-page-card-wrap
+                  / /.dashboard-action
+                / /.dashboard-action-block
+              / /.project-block
+            / /.project-blocks-row
+        / /#inbox-main-col
+      / /#inbox-wrap
+    / /.container
+  / /#main-content

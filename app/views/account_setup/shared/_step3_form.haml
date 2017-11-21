@@ -1,0 +1,55 @@
+%div.hide.categories-list-path= categories_list_path()
+= nested_form_for @person, url: (@person.kind_of?(Business) ? business_account_setup_step4_path : worker_account_setup_step4_path), 
+method: :put, data: {toggle: "validator"} do |f|
+  .account-signup-category-forms.account-setup-category
+    = f.fields_for :skills do |cf|
+      / Work Category
+      .form-group.has-feedback.parent-categories
+        %label{:for => "work-category"}
+          = t("account_setup.business.step3.work_category")
+          %span.required-mark *
+        = cf.select :category_id, options_for_select(@current_community.top_level_categories.collect{|c| [c.display_name(I18n.locale), c.id]}, cf.object.category.try(:parent_id)),
+          {:include_blank => t("account_setup.business.step3.select_category")},
+          {class: "form-control skills-category-select", 
+          required: "true"}
+
+        .help-block.with-errors
+      / Skills/Expertise
+      .row
+        .col-md-6
+          .form-group.has-feedback.sub-categories-select
+            %label{:for => "skills"}
+              = t("account_setup.business.step3.subcategories")
+              %span.required-mark *
+            = cf.select :category_id, options_for_select(Category.where(parent_id: cf.object.category.try(:parent_id)).collect{|c| [c.display_name(I18n.locale), c.id]}, cf.object.category_id),
+              {:include_blank => t("account_setup.business.step3.select_skills")}, 
+              {class: "form-control skills-category-select",
+              id: "work-category",
+              required: "true"}
+            .help-block.with-errors
+          / /.form-group
+        .col-md-6
+          .form-group.has-feedback
+            %label{:for => "years-experience"}
+              =t("account_setup.business.step3.years_of_exp")
+              %span.required-mark *
+
+            = cf.select :years_of_experience, 
+            options_for_select(Skill::YEARS, cf.object.years_of_experience), 
+            {:include_blank => @person.kind_of?(Business) ? t("account_setup.business.step3.select") : t("account_setup.worker.step3.select") },
+            {class: "form-control", 
+            required: "true"}          
+            .help-block.with-errors=t("account_setup.business.step3.enter_numbers_only")
+
+
+      / /.row
+      / Add Skills/Expertise, Controls
+    .add-controls-wrap
+      = f.link_to_add "+ another expertise", :skills, class: "add_more_skils"
+    / /.add-controls-wrap
+    / Next Step button
+    #next-step-button.btn-wrapper.btn-centered
+      %button.btn.btn-primary.hvr-pop{:type => "submit"}=t("account_setup.business.next_step")
+    / /.btn-wrapper
+    / Steps visual guide
+    = render "account_setup/shared/bottom_progress_bar", progresses: @progresses, person: @person

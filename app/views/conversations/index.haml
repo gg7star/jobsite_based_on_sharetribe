@@ -1,0 +1,66 @@
+= render partial: 'layouts/header_submenu', locals: header_props()
+/ Inbox body begins
+/ Inbox toolbar
+= render partial: 'inbox_toolbar'
+%section#main-content.messages-with-submenu
+	.container
+		#messages-wrap.row
+			= hidden_field_tag :fetch_message_endpoint, fetch_messages_conversations_path
+
+			/ Messages, sidebar
+			#messages-right-sidebar.col-md-3.col-sm-4.sidebar
+				.messages-stack
+					= render :partial => "conversation_row", :collection => conversations, as: :conversation
+					
+				/ /.messages-stack
+			/ /#inbox-right-sidebar
+			/ Messages, main content
+			#messages-main-col.col-md-9.col-sm-8
+				%article
+					.thread-header
+						%h2 
+							= message_receiver(current_conversation).full_name
+						%h3 Personal assistant, business manager
+					/ /.thread-header
+					/ .thread-timestamp
+					%p 
+						= current_conversation.last_message_at
+					/ /.thread-timestamp
+					#messages{:onload => 'javascript:scrollToBottom()'}
+						= render :partial => "message_row", :collection => messages, as: :message_or_action
+					/ New message wrap
+					.new-message-form-wrap.clearfix
+						.blog-comment-form
+							#reply_form.message-avatar-padding.message-reply-form
+								= form_for message_form, :url => message_form_action do |f|
+									.message-fields-wrap
+										/ Message
+										.message-field
+											= f.text_area :content, :class => "reply_form_text_area", :placeholder => t("conversations.show.write_a_reply")
+											= f.hidden_field :conversation_id
+											= f.hidden_field :last_viewed_time, :value => "#{current_conversation.last_message_at}"
+										/ /.message-field
+										/ Message actions
+										.message-actions-wrap
+											%ul
+												%li
+													%a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+														%i.fa.fa-paperclip{"aria-hidden" => "true"}
+												%li
+													%a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Explain icon here"}
+														%i.fa.fa-clipboard{"aria-hidden" => "true"}
+										/ /.message-actions-wrap
+										/ Submit button
+										.message-button-wrap
+											= f.submit t("conversations.show.send_reply"), :class => 'btn btn-primary'
+										/ /.message-button-wrap
+									/ /.message-fields-wrap
+						/ /.blog-comment-form
+					/ /.new-message-form-wrap
+			/ /#messages-main-col
+		/ /#messages-wrap
+	/ /.container
+/ /#main-content
+- content_for :javascript do
+	initialize_timer();
+	initialize_reply_form('#{I18n.locale}');

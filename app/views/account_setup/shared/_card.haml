@@ -1,0 +1,68 @@
+.biz-card-wrapper
+  .biz-card-frame
+    .biz-card-inner-frame
+      / Bizcard Logo
+      .biz-card-logo
+        .biz-card-logo-sizer
+          = link_to(image_edit_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit") do
+            = image_tag main_image(object), id: "card_main_image"
+        / /.biz-card-logo-sizer
+      / /.biz-card-logo
+      / Bizcard Desc
+      .biz-card-desc
+        %h2.co-name
+          = link_to(main_title_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit logo", id: "card_main_title") do
+            .card-text
+              = main_title object
+            %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+        %h3.co-location
+          = link_to(main_location_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit", id: "card_main_location") do
+            .card-text
+              = main_location object
+            %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+        %h4.co-cat-skill
+          = link_to(main_category_and_skills_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit", id: "card_main_skills") do
+            .card-text
+              = h(category_and_skills(object)).gsub(/\n/, '<br/>').html_safe
+            %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+        %div.co-desc
+          = link_to(main_description_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit", id: "card_main_description") do
+            .card-text
+              = main_description object
+            %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+      / /.biz-card-desc
+    / /.biz-card-inner-frame
+    / Promo pics (3)
+    .biz-card-promo-pix
+      .biz-card-promo-pix-wrap.clearfix
+        .biz-card-promo
+          - if promo_image(object, 0)
+            = link_to(main_promo_images_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+              = image_tag promo_image(object, 0), id: "promo_image_0"
+          - else
+            = link_to(main_promo_images_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+              = image_tag "promo-pic0.jpg", id: "promo_image_0"
+
+        .biz-card-promo
+          - if promo_image(object, 0)
+            = link_to(main_promo_images_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+              = image_tag promo_image(object, 1), id: "promo_image_1"
+          - else
+            = link_to(main_promo_images_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+              = image_tag "promo-pic1.jpg", id: "promo_image_1"
+
+        .biz-card-promo
+          - if promo_image(object, 0)
+            = link_to(main_promo_images_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+              = image_tag promo_image(object, 2), id: "promo_image_2"
+          - else
+            = link_to(main_promo_images_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+              = image_tag "promo-pic2.jpg", id: "promo_image_2"
+
+        / - object.images[0..2].each do |i|
+        /   / Image 1
+        /   .biz-card-promo
+        /     = link_to(main_promo_images_url(object), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+        /       = image_tag i.try(:image).try(:url, :card_small)
+.btn-wrapper.edit-card-button.btn-ralign
+  %button.btn.btn-primary.hvr-pop{:type => "submit"} Edit your business card

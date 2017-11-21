@@ -1,0 +1,17 @@
+/*!
+ *  style-ie.ccs is Only for IE Browsers
+ */
+
+/*  magnific popup close  */
+.mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close, .mfp-image-holder, .mfp-iframe-holder { cursor: url("images/icon-zoom-out.cur"), default;}
+
+/*  magnific popup content   */
+.mfp-auto-cursor .mfp-content { cursor: image-url("landing-page/icon-zoom-out.cur"), default;}
+
+.sticky-nav { display: block; height: 57px;}
+nav .container { display: block;}
+
+
+
+
+

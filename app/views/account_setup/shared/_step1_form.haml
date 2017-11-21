@@ -1,0 +1,28 @@
+= form_for @person, url: (@person.kind_of?(Business) ? business_account_setup_step2_path : worker_account_setup_step2_path), 
+method: :put, data: {toggle: "validator"} do |f|
+  / Name of the company
+  .form-group.has-feedback
+    %label{:for => "company-name"}
+      = @person.kind_of?(Business) ? t("account_setup.business.step1.name_of_company") : t("account_setup.worker.step1.name_of_worker")
+      %span.required-mark *
+    = f.text_field :overall_name, id: "company-name", class: "form-control", required: true
+    %span.glyphicon.form-control-feedback{"aria-hidden" => "true"}
+    .help-block.with-errors= @person.kind_of?(Business) ? t("account_setup.business.step1.how_your_company_should_be_named") : t("account_setup.worker.step1.how_you_should_be_named")
+  / /.form-group
+  / Upload picture or video
+  #upload-button-wrapper.btn-wrapper.btn-centered.upload-company-logo
+    %p.advice-text= @person.kind_of?(Business) ? t("account_setup.business.step1.upload_logo") : t("account_setup.worker.step1.upload_logo")
+    / = image_tag @person.image.url(:medium)
+    %br
+    %br
+    .fileUpload.btn.btn-upload
+      %span= t("account_setup.business.browse")
+      = f.file_field :image, class: "upload", id: "main_image_url"
+    / /.btn-upload
+  / /#upload-button-wrapper
+  / Next Step button
+  #next-step-button.btn-wrapper.btn-centered
+    %button.btn.btn-primary.hvr-pop{:type => "submit"}= t("account_setup.business.next_step")
+  / /.btn-wrapper
+  / Steps visual guide
+  = render "account_setup/shared/bottom_progress_bar", progresses: @progresses, person: @person

@@ -1,0 +1,20 @@
+= render partial: 'layouts/header_submenu', locals: header_props()
+.listing-index
+  - content_for :search_bar_left_block do
+    %ul
+      %li#messages-filter-head Showing search results for:
+      %li
+        %a.active{:href => "#"} garden house
+  = render "/layouts/search_bar"
+  %section#main-content.inbox-with-submenu
+    #search-with-icons-wrapper.container
+      = render "/listings/categories_belt"
+      #inbox-wrap.row.search-page-sidebar
+        #inbox-right-sidebar.col-md-4.col-sm-4.sidebar
+          = render "listings/sidebar"
+        #inbox-main-col.col-md-8.col-sm-8.search-page-main
+          %article
+            %h3#results-header
+              %span #{@listings.count} projects
+              match your search filters
+            = render "/listings/listings", listings: @listings

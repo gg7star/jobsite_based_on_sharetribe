@@ -1,0 +1,86 @@
+/ Project Card
+.project-card-wrapper
+  .project-card-frame
+    / JC pin
+    .pin-tier
+      .pin-grip
+        = image_tag "jcpin.png"
+      / /.pin-grip
+    / /.pin-tier
+    / Title column (left) and location and picture column (right)
+    .project-card-tier1.clearfix
+      / Project Name
+      .project-name-wrap
+        %article
+          %h2
+            = link_to(main_title_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit logo", id: "card_main_title") do
+              .card-text
+                = main_title listing
+              %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+          %div.project-price
+            = link_to(main_price_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit logo", id: "card_main_price") do
+              .card-text
+                = listing_price listing
+              %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+          / Tier 2
+          .project-image-tile-100.clearfix
+            - if project_image(listing, 0)
+              = link_to(main_promo_images_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+                = image_tag project_image(listing, 0), id: "card_main_image_0"
+            - else
+              = link_to(main_promo_images_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+                = image_tag "gardenshed0.jpg", id: "card_main_image_0"
+          / /.project-image-tile-tier
+      / /.project-name-wrap
+      / Project Location and pictures
+      .project-location-pictures-wrap
+        %article
+          %h3.project-location
+            = link_to(main_location_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit", id: "card_main_location") do
+              .card-text
+                = main_location listing
+              %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+          / Project image tiles
+          .project-image-tile-wrap.clearfix
+            / Tier 1
+            .project-image-tile-tier.clearfix
+              / Project Image Tile (50% wide)
+              .project-image-tile-50
+                - if project_image(listing, 1)
+                  = link_to(main_promo_images_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+                    = image_tag project_image(listing, 1), id: "card_main_image_1"
+                - else
+                  = link_to(main_promo_images_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+                    = image_tag "gardenshed1.jpg", id: "card_main_image_1"
+              / /.project-image-tile
+              / Project Image Tile (50% wide)
+              .project-image-tile-50
+                - if project_image(listing, 2)
+                  = link_to(main_promo_images_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+                    = image_tag project_image(listing, 2), id: "card_main_image_2"
+                - else
+                  = link_to(main_promo_images_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit promo picture") do
+                    = image_tag "gardenshed2.jpg", id: "card_main_image_2"
+              / /.project-image-tile
+            / /.project-image-tile-tier
+          / /.project-image-tile-wrap
+          / Project description
+          .project-card-desc-wrap
+            %div
+              = link_to(main_description_url(listing), data: {placement: "bottom", "toggle": "tooltip"}, title: "Edit", id: "card_main_description") do
+                .card-text
+                  = main_description listing
+                %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+          / /.project-card-desc-wrap
+          / JobCIE signature logo
+          .jobcie-signature
+            = image_tag "logo.png"
+          / /.jobcie-signature
+      / /.project-location-pictures-wrap
+    / /.project-card-tier1
+  / /.project-card-frame
+/ /.project-card-wrapper
+/ Edit card button
+.btn-wrapper.edit-project-button.btn-ralign
+  %button.btn.btn-primary.hvr-pop{:type => "submit"} Edit your project poster
+/ /.btn-wrapper

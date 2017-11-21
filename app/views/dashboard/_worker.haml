@@ -1,0 +1,193 @@
+= render partial: 'layouts/header_submenu', locals: header_props()
+%section.dashboard
+  #main-content.inbox-with-submenu
+    .container
+      #inbox-wrap.row
+        / Dashboard sidebar
+        / My profile
+        #inbox-right-sidebar.col-md-2.col-sm-4.sidebar.xs-margin-top-ten.clearfix
+          = render "/dashboard/sidebar"
+        #inbox-main-col.col-md-10.col-sm-8
+          %article
+            .project-blocks-row.clearfix
+              / Find Work
+              .project-block
+                .dashboard-action-block.clearfix
+                  .dashboard-action
+                    %h2 Find Work
+                    #dashboard-job-search.widget
+                      = form_tag(listings_path, method: :get) do
+                        %i.fa.fa-search.close-search.search-button
+                        = text_field_tag :search, "", placeholder: "Enter job keywords", class: "search-input"
+                        .advanced-search-prompt
+                          %p
+                            = link_to "Advanced search", listings_path
+                    .category-filter
+                      %h3.dashboard-subtitle Filter by My Categories
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "#"} Professional (5,200 jobs)
+                        %li
+                          %a{:href => "#"} Home Help (1,089 jobs)
+                        %li
+                          %a{:href => "#"} Education (864 jobs)
+                    / /.category-filter
+                  / /.dashboard-action
+                / /.dashboard-action-block
+              / /.project-block
+              / Manage Work
+              .project-block
+                .dashboard-action-block.clearfix
+                  .dashboard-action
+                    %h2 Manage Work
+                    .dash-inbox-overview
+                      %h3.dashboard-subtitle Inbox
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => conversations_path} New Messages (#{unread_count})
+                        %li
+                          %a{:href => "new-offers-worker.html"} New Project Offers (2)
+                        %li
+                          %a{:href => "sent-offers-worker.html"} Declined Job Offers (1)
+                    / /.dash-inbox-overview
+                    .dash-inbox-overview
+                      %h3.dashboard-subtitle Sent
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "sent-offers-worker.html"} Job Offers Awaiting Response (3)
+                    / /.dash-inbox-overview
+                    .dash-inbox-overview
+                      %h3.dashboard-subtitle Client Feedback
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "feedback-worker.html"} John Doe has left you a review
+                          %span.timestamp 2h ago
+                        %li
+                          %a{:href => "feedback-worker.html"} Darth Vader has left you a review
+                          %span.timestamp 1 day ago
+                    / /.dash-inbox-overview
+                  / /.dashboard-action
+                / /.dashboard-action-block
+              / /.project-block
+            / /.project-blocks-row
+            .project-blocks-row.clearfix
+              / Find Work
+              .project-block
+                .dashboard-action-block.clearfix
+                  .dashboard-action
+                    %h2 Manage My Account
+                    .account-action-block
+                      %h3.dashboard-subtitle My Membership Plan: Silver Worker
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "packages1.html"}
+                            %i.fa.fa-pencil-square.fa-fw{"aria-hidden" => "true"}
+                            Change Plan
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-bar-chart.fa-fw{"aria-hidden" => "true"}
+                            Billing Tracker
+                    / /.account-action-block
+                    .account-action-block
+                      %h3.dashboard-subtitle My Settings
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-lock.fa-fw{"aria-hidden" => "true"}
+                            Change Password
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-id-card.fa-fw{"aria-hidden" => "true"}
+                            Change Worker/Business Details
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-usd.fa-fw{"aria-hidden" => "true"}
+                            Change Primary Currency
+                    / /.account-action-block
+                    .account-action-block
+                      %h3.dashboard-subtitle Help and Support
+                      %ul.cat-search-overview
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-question-circle.fa-fw{"aria-hidden" => "true"}
+                            Search FAQ
+                        %li
+                          %a{:href => "#"}
+                            %i.fa.fa-users.fa-fw{"aria-hidden" => "true"}
+                            Contact Support
+                    / /.account-action-block
+                  / /.dashboard-action
+                / /.dashboard-action-block
+              / /.project-block
+              / Card Editor
+              .project-block
+                .dashboard-action-block.clearfix
+                  .dashboard-action
+                    %h2 My JOB&amp;CIE Card
+                    / Worker Card
+                    .landing-page-card-wrap.clearfix
+                      .biz-card-wrapper
+                        .biz-card-frame
+                          .biz-card-inner-frame
+                            / Worker Card Logo
+                            .biz-card-logo
+                              .biz-card-logo-sizer
+                                %a{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "#", :title => "Edit your picture or logo"}
+                                  %img{:alt => "", :src =>asset_path('/assets/avatar_examples/jobcie-avatar-300-bare.png') }/
+                              / /.biz-card-logo-sizer
+                            / /.biz-card-logo
+                            / Worker Card Desc
+                            .biz-card-desc
+                              %h2.co-name
+                                %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                                  My Worker Name
+                                  %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                              %h3.co-location
+                                %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                                  My location
+                                  %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                              %h4.co-cat-skill
+                                %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                                  My category | My skill
+                                  %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                              %p.co-desc
+                                %a{"data-placement" => "right", "data-toggle" => "tooltip", :href => "#", :title => "Edit"}
+                                  My description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a molestie nisl. Suspendisse iaculis enim eget lectus elementum rhoncus.
+                                  %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                            / /.biz-card-desc
+                          / /.biz-card-inner-frame
+                          / Promo pics (3)
+                          .biz-card-promo-pix
+                            .biz-card-promo-pix-wrap.clearfix
+                              / Image 1
+                              .biz-card-promo
+                                %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Edit promo picture"}
+                                  %img{:alt => "", :src => asset_path('/assets/workerpromo1.jpg')}/
+                              / /.biz-card-promo
+                              / Image 2
+                              .biz-card-promo
+                                %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Edit promo picture"}
+                                  %img{:alt => "", :src => asset_path('/assets/workerpromo2.jpg')}/
+                              / /.biz-card-promo
+                              / Image 3
+                              .biz-card-promo
+                                %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Edit promo picture"}
+                                  %img{:alt => "", :src => asset_path('/assets/workerpromo3.jpg')}/
+                              / /.biz-card-promo
+                            / /.biz-card-promo-pix-wrap
+                          / /.biz-card-promo-pix
+                        / /.biz-card-frame
+                      / /.biz-card-wrapper
+                      / Edit card button
+                      .btn-wrapper.edit-card-button.btn-ralign
+                        %a.btn.btn-primary.hvr-pop{:href => "card-poster-editor.html"} Edit my JOB&amp;CIE card
+                      / /.btn-wrapper
+                    / /.landing-page-card-wrap
+                  / /.dashboard-action
+                / /.dashboard-action-block
+              / /.project-block
+            / /.project-blocks-row
+        / /#inbox-main-col
+      / /#inbox-wrap
+    / /.container
+  / /#main-content

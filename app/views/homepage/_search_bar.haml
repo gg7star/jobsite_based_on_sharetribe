@@ -1,0 +1,6 @@
+/ Worker search form
+.col-lg-8.col-md-7.col-sm-8.no-padding-left.xs-no-padding.xs-margin-bottom-four
+  = text_field_tag "q", params[:q], :placeholder => (@community_customization && @community_customization.search_placeholder) || t("homepage.index.what_do_you_need"), :class => 'big-input landing-subscribe-input no-margin-bottom', :id => 'jobwords'
+.col-lg-4.col-md-5.col-sm-4.no-padding
+  %button#notifyme-button.landing-subscribe-button.no-margin-bottom.xs-width-100{:name => "notifyme-button", :type => "submit"}
+    = t("homepage.index.find_a_worker")

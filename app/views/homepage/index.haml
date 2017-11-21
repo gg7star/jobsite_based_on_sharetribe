@@ -1,0 +1,602 @@
+- content_for :javascript do
+  initialize_homepage();
+
+- content_for :coverfade_class do
+  = "without-text"
+
+- content_for :extra_javascript do
+  - # maps.google can't be loaded twice
+  - maps_key = MarketplaceHelper.google_maps_key(@current_community.id)
+  - key_param = maps_key ? "&key=#{maps_key}" : ""
+  - # Topbar adds its own maps script, otherwise add it if location search enabled or map is visible
+  - needs_maps = !FeatureFlagHelper.feature_enabled?(:topbar_v1) && (main_search != :keyword || @view_type.eql?("map"))
+  - if(needs_maps)
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places#{key_param}"
+  - if(@view_type.eql?("map"))
+    = javascript_include_tag "markerclusterer.js"
+
+- content_for :title_header do
+  - is_homepage = params[:controller] == "homepage" && params[:action] == "index"
+  - if @big_cover_photo
+    / Video Background
+    %section.callout
+      .video-bg
+        %video.fade-in-video{:autoplay => "", :loop => "", :muted => ""}
+          %source{:src => "video/busy-new-york-intersection.webm", :type => "video/webm"}
+          %source{:src => "video/busy-new-york-intersection.ogv", :type => "video/ogg"}
+          %source{:src => "https://s3.amazonaws.com/flm.pcftp/test/uploads/video/busy-new-york-intersection1.mp4", :type => "video/mp4"}
+      / /.video-bg
+      .video-overlay
+      .callout-inner
+        / Text overlay
+        %h1.letter-spacing-2.white-text.margin-three.no-margin-bottom.landing-title The world is filled with talented people!
+        %span.text-large.letter-spacing-2.white-text.margin-two.display-block.hero-subtitle Find your talented people here
+        / Worker search
+        .margin-five.margin-ten-bottom
+          .col-lg-6.col-md-7.col-sm-10.col-xs-11.clearfix.landing-subscribe.center-col
+            / Worker search form
+            = render partial: "search_bar"
+        / /.margin-five margin-ten-bottom
+      / /.callout-inner
+    / /.callout
+
+- content_for(:head) do
+  - if seo_pagination_links[:prev].present?
+    %link{rel: "prev", href: seo_pagination_links[:prev]}
+  - if seo_pagination_links[:next].present?
+    %link{rel: "next", href: seo_pagination_links[:next]}
+
+- if @current_community.private? && @big_cover_photo
+  - if @community_customization && @community_customization.private_community_homepage_content
+    .community-customization-wrapper
+      = @community_customization.private_community_homepage_content.html_safe
+  - else
+    = t(".this_is_private_community")
+
+- else
+
+  - if @big_cover_photo
+    / Professionals Overview
+    %div#pro-overview
+      .container
+        / Section title
+        .title-wrapper
+          %h2
+            No matter which kind of help you need,
+            %br>/
+            we have a professional to do it.
+        / /.title-wrapper
+        / Professionals, Group 1
+        .pro-row.clearfix
+          / Education
+          .pro-wrapper.clearfix
+            / Circular Image
+            .pro-img-wrap
+              %a{:href => "#", :title => "Education"}
+                %img{:alt => "", :src => "assets/landing_page/education.png"}/
+            / /.pro-img-wrap
+            .category-infra.clearfix
+              / Text caption
+              %h3.pro-img-label
+                %a{:href => "#", :title => "Education"} Education
+              / Subcategories button
+              .subcat-btn-wrap
+                %button.btn.btn-primary.hvr-pop.pointer{"aria-controls" => "educationSubcategories", "aria-expanded" => "false", "data-target" => "#educationSubcategories", "data-toggle" => "collapse", :type => "button"}
+                  Subcategories
+                  %i.fa.fa-caret-down{"aria-hidden" => "true"}
+              / /.subcat-btn-wrap
+              / Subcategories
+              #educationSubcategories.collapse.subcat-wrap
+                %ul.subcategories
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Private teacher
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Dance teacher
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Music teacher
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Driving teacher
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Language teacher
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Speech therapist
+                / /.subcategories
+              / .subcat-wrap#educationSubcategories
+            / /.category-infra
+          / /.pro-wrapper
+          / Home help
+          .pro-wrapper
+            / Circular Image
+            .pro-img-wrap
+              %a{:href => "#", :title => "Home help"}
+                %img{:alt => "", :src => "assets/landing_page/homehelp.png"}/
+            / /.pro-img-wrap
+            .category-infra.clearfix
+              / Text caption
+              %h3.pro-img-label
+                %a{:href => "#", :title => "Home help"} Home help
+              / Subcategories button
+              .subcat-btn-wrap
+                %button.btn.btn-primary.hvr-pop.pointer{"aria-controls" => "homehelpSubcategories", "aria-expanded" => "false", "data-target" => "#homehelpSubcategories", "data-toggle" => "collapse", :type => "button"}
+                  Subcategories
+                  %i.fa.fa-caret-down{"aria-hidden" => "true"}
+              / /.subcat-btn-wrap
+              / Subcategories
+              #homehelpSubcategories.collapse.subcat-wrap
+                %ul.subcategories
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Nurse
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Beneficiary attendant
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Cleaning lady
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Window cleaner
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Babysitter
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Dog keeper
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Designer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Mover
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Nutritionist
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Personal trainer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Yoga teacher
+                / /.subcategories
+              / .subcat-wrap#homehelpSubcategories
+            / /.category-infra
+          / /.pro-wrapper
+          / Field project
+          .pro-wrapper.clearfix
+            / Circular Image
+            .pro-img-wrap
+              %a{:href => "#", :title => "Field project"}
+                %img{:alt => "", :src => "assets/landing_page/field-project.png"}/
+            / /.pro-img-wrap
+            .category-infra.clearfix
+              / Text caption
+              %h3.pro-img-label
+                %a{:href => "#", :title => "Field project"} Field project
+              / Subcategories button
+              .subcat-btn-wrap
+                %button.btn.btn-primary.hvr-pop.pointer{"aria-controls" => "fieldprojectSubcategories", "aria-expanded" => "false", "data-target" => "#fieldprojectSubcategories", "data-toggle" => "collapse", :type => "button"}
+                  Subcategories
+                  %i.fa.fa-caret-down{"aria-hidden" => "true"}
+              / /.subcat-btn-wrap
+              / Subcategories
+              #fieldprojectSubcategories.collapse.subcat-wrap
+                %ul.subcategories
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Lawn care
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Landscaping
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Snow removal
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Gardener
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Window washer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Pool expert
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Paving pro
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Asphalt labourer
+                / /.subcategories
+              / .subcat-wrap#fieldprojectSubcategories
+            / /.category-infra
+          / /.pro-wrapper
+          / Handyman
+          .pro-wrapper.clearfix
+            / Circular Image
+            .pro-img-wrap
+              %a{:href => "#", :title => "Handyman"}
+                %img{:alt => "", :src => "assets/landing_page/handyman.png"}/
+            / /.pro-img-wrap
+            .category-infra.clearfix
+              / Text caption
+              %h3.pro-img-label
+                %a{:href => "#", :title => "Handyman"} Handyman
+              / Subcategories button
+              .subcat-btn-wrap
+                %button.btn.btn-primary.hvr-pop.pointer{"aria-controls" => "handymanSubcategories", "aria-expanded" => "false", "data-target" => "#handymanSubcategories", "data-toggle" => "collapse", :type => "button"}
+                  Subcategories
+                  %i.fa.fa-caret-down{"aria-hidden" => "true"}
+              / /.subcat-btn-wrap
+              / Subcategories
+              #handymanSubcategories.collapse.subcat-wrap
+                %ul.subcategories
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Emergency repair
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Lock smith
+                / /.subcategories
+              / .subcat-wrap#handymanSubcategories
+            / /.category-infra
+          / /.pro-wrapper
+          / Business
+          .pro-wrapper.clearfix
+            / Circular Image
+            .pro-img-wrap
+              %a{:href => "#", :title => "Business"}
+                %img{:alt => "", :src => "assets/landing_page/business.png"}/
+            / /.pro-img-wrap
+            .category-infra.clearfix
+              / Text caption
+              %h3.pro-img-label
+                %a{:href => "#", :title => "Business"} Business
+              / Subcategories button
+              .subcat-btn-wrap
+                %button.btn.btn-primary.hvr-pop.pointer{"aria-controls" => "businessSubcategories", "aria-expanded" => "false", "data-target" => "#businessSubcategories", "data-toggle" => "collapse", :type => "button"}
+                  Subcategories
+                  %i.fa.fa-caret-down{"aria-hidden" => "true"}
+              / /.subcat-btn-wrap
+              / Subcategories
+              #businessSubcategories.collapse.subcat-wrap
+                %ul.subcategories
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Sales person
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Graphic designer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Programmer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Assistant
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Secretary general
+                / /.subcategories
+              / .subcat-wrap#businessSubcategories
+            / /.category-infra
+          / /.pro-wrapper
+        / /.pro-row
+        / Professionals, Group 2
+        #four-col.pro-row.clearfix
+          / Professional
+          #four-col-first.pro-wrapper.clearfix
+            / Circular Image
+            .pro-img-wrap
+              %a{:href => "#", :title => "Professional"}
+                %img{:alt => "", :src => "assets/landing_page/professional.png"}/
+            / /.pro-img-wrap
+            .category-infra.clearfix
+              / Text caption
+              %h3.pro-img-label
+                %a{:href => "#", :title => "Professional"} Professional
+              / Subcategories button
+              .subcat-btn-wrap
+                %button.btn.btn-primary.hvr-pop.pointer{"aria-controls" => "professionalSubcategories", "aria-expanded" => "false", "data-target" => "#professionalSubcategories", "data-toggle" => "collapse", :type => "button"}
+                  Subcategories
+                  %i.fa.fa-caret-down{"aria-hidden" => "true"}
+              / /.subcat-btn-wrap
+              / Subcategories
+              #professionalSubcategories.collapse.subcat-wrap
+                %ul.subcategories
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Accountant
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Notary
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Lawyer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Insurance representative
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Realtor
+                / /.subcategories
+              / .subcat-wrap#professionalSubcategories
+            / /.category-infra
+          / /.pro-wrapper
+          / Entertainment
+          .pro-wrapper.clearfix
+            / Circular Image
+            .pro-img-wrap
+              %a{:href => "#", :title => "Entertainment"}
+                %img{:alt => "", :src => "assets/landing_page/entertainment.png"}/
+            / /.pro-img-wrap
+            .category-infra.clearfix
+              / Text caption
+              %h3.pro-img-label
+                %a{:href => "#", :title => "Entertainment"} Entertainment
+              / Subcategories button
+              .subcat-btn-wrap
+                %button.btn.btn-primary.hvr-pop.pointer{"aria-controls" => "entertainmentSubcategories", "aria-expanded" => "false", "data-target" => "#entertainmentSubcategories", "data-toggle" => "collapse", :type => "button"}
+                  Subcategories
+                  %i.fa.fa-caret-down{"aria-hidden" => "true"}
+              / /.subcat-btn-wrap
+              / Subcategories
+              #entertainmentSubcategories.collapse.subcat-wrap
+                %ul.subcategories
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Disk jockey
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Party planner
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Wedding planner
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Magician
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Clown
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Animator
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Photographer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Video maker
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Masseuse
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Makeup artist
+                / /.subcategories
+              / .subcat-wrap#entertainmentSubcategories
+            / /.category-infra
+          / /.pro-wrapper
+          / Construction
+          .pro-wrapper.clearfix
+            / Circular Image
+            .pro-img-wrap
+              %a{:href => "#", :title => "Construction"}
+                %img{:alt => "", :src => "assets/landing_page/construction.png"}/
+            / /.pro-img-wrap
+            .category-infra.clearfix
+              / Text caption
+              %h3.pro-img-label
+                %a{:href => "#", :title => "Construction"} Construction
+              / Show Subcategories button
+              .subcat-btn-wrap
+                %button.btn.btn-primary.hvr-pop.pointer{"aria-controls" => "constructionSubcategories", "aria-expanded" => "false", "data-target" => "#constructionSubcategories", "data-toggle" => "collapse", :type => "button"}
+                  Subcategories
+                  %i.fa.fa-caret-down{"aria-hidden" => "true"}
+              / /.subcat-btn-wrap
+              / Subcategories
+              #constructionSubcategories.collapse.subcat-wrap
+                %ul.subcategories
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    General contractor
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Carpenter
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Painter
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Roofer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Electrician
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Plumber
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Plasterer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Bricklayer
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Welder
+                / /.subcategories
+              / .subcat-wrap#constructionSubcategories
+            / /.category-infra
+          / /.pro-wrapper
+          / Mechanic
+          .pro-wrapper.clearfix
+            / Circular Image
+            .pro-img-wrap
+              %a{:href => "#", :title => "Mechanic"}
+                %img{:alt => "", :src => "assets/landing_page/mechanic.png"}/
+            / /.pro-img-wrap
+            .category-infra.clearfix
+              / Text caption
+              %h3.pro-img-label
+                %a{:href => "#", :title => "Mechanic"} Mechanic
+              / Subcategories button
+              .subcat-btn-wrap
+                %button.btn.btn-primary.hvr-pop.pointer{"aria-controls" => "mechanicSubcategories", "aria-expanded" => "false", "data-target" => "#mechanicSubcategories", "data-toggle" => "collapse", :type => "button"}
+                  Subcategories
+                  %i.fa.fa-caret-down{"aria-hidden" => "true"}
+              / /.subcat-btn-wrap
+              / Subcategories
+              #mechanicSubcategories.collapse.subcat-wrap
+                %ul.subcategories
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Car mechanic
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Boat mechanic
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Repairman
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Repairer household appliances
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Repairer commercial appliances
+                  %li
+                    %i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+                    Repairer body shop
+                / /.subcategories
+              / .subcat-wrap#mechanicSubcategories
+            / /.category-infra
+          / /.pro-wrapper
+        / /.pro-row
+        / Post your project button
+        .post-button-wrapper
+          - new_project_path = ''
+          %a.btn.btn-primary.hvr-bounce-in{:href => new_project_path} Post your project
+        / /.pro-row
+      / /.container
+    / /#pro-overview
+    / How it works
+    %section#steps-section
+      .container
+        / Section title
+        .title-wrapper
+          %h2 How it works
+        / /.title-wrapper
+        / Numbers and lines
+        .steps-wrapper
+          / #1
+          .steps-number-wrap
+            %img{:alt => "", :src => "assets/landing_page/1.png"}/
+          / /.steps-number-wrap
+          / Line
+          .steps-line
+            #line1.line  
+          / /.steps-line
+          / #2
+          .steps-number-wrap
+            %img{:alt => "", :src => "assets/landing_page/2.png"}/
+          / /.steps-number-wrap
+          / Line
+          .steps-line
+            #line2.line  
+          / /.steps-line
+          / #3
+          .steps-number-wrap
+            %img{:alt => "", :src => "assets/landing_page/3.png"}/
+          / /.steps-number-wrap
+          / Line
+          .steps-line
+            #line3.line  
+          / /.steps-line
+          / #4
+          .steps-number-wrap
+            %img{:alt => "", :src => "assets/landing_page/4.png"}/
+          / /.steps-number-wrap
+        / /#steps-wrapper
+        / Steps desc
+        #steps-desc.steps-wrapper
+          / #1
+          .steps-number-wrap
+            %h4.steps-number-label Post your project with your budget
+          / /.steps-number-wrap
+          / Line
+          .steps-line
+            \ 
+          / /.steps-line
+          / #2
+          .steps-number-wrap
+            %h4.steps-number-label Receive offers
+          / /.steps-number-wrap
+          / Line
+          .steps-line
+            \ 
+          / /.steps-line
+          / #3
+          .steps-number-wrap
+            %h4.steps-number-label Select your worker and negotiate details
+          / /.steps-number-wrap
+          / Line
+          .steps-line
+            \ 
+          / /.steps-line
+          / #4
+          .steps-number-wrap
+            %h4.steps-number-label Get the job done
+          / /.steps-number-wrap
+        / /#steps-wrapper
+        / Watch our video button
+        .post-button-wrapper
+          %a.btn.btn-primary.hvr-bounce-in{:href => "https://www.youtube.com/watch?v=L9szn1QQfas"} Watch our video
+        / /.post-button-wrapper
+      / /.container
+    / /#steps-section
+    %section#workflow.mosaic1
+      .container
+        / Title
+        .title-wrapper
+          %h2#mosaic-title
+            Whatever your project is,
+            %br>/
+            we've got you covered.
+        / /.title-wrapper
+        / Sign Up Now button
+        .post-button-wrapper
+          %a.btn.btn-primary.hvr-bounce-in{:href => sign_up_path} Sign Up Now
+        / /.post-button-wrapper
+      / /.container
+    / /#workflow
+  - else
+    - if params[:dashboard_mode] == 'client'
+      = render partial: "dashboard/client", locals: header_props()
+    - else 
+      = render partial: "dashboard/worker", locals: header_props()
+
+- content_for :extra_javascript do
+  :javascript
+    (function() {
+      $('a.lightbox').nivoLightbox(); 
+    })();
+  / Video background scripts
+  / This script fades in the 'poster', ie. screenshot, before the video begins to play, for smoothness
+  :javascript
+    var fade_in_videos = document.querySelectorAll('.fade-in-video');
+    for( i=0; i<fade_in_videos.length; i++ ) {
+        fade_in_videos[i].addEventListener("playing", function(){
+            this.className += ' is-playing';
+        });
+    }
+  / This script hides the video altogether in iOS, where satisfactory display remains problematic
+  :javascript
+    var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
+    if( iOS ) {
+        var background_videos = document.querySelectorAll('.video-bg video');
+        for( i=0; i<background_videos.length; i++ ) {
+            background_videos[i].parentNode.removeChild(background_videos[i]);
+        }
+    }

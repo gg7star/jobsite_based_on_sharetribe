@@ -1,0 +1,121 @@
+/ Footer
+%footer
+  / Select language
+  .container
+    #language-select-wrap.row
+      / Desktop version
+      #desktop-language-select.btn-group
+        / Select language button
+        %button.btn.btn-language.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+          %i.fa.fa-globe.language-icon{"aria-hidden" => "true"}
+          Select language
+          %i.fa.fa-caret-up
+        / Language dropup
+        %ul.dropdown-menu.drop-up{:role => "menu"}
+          %li.english-lang.active-lang
+            %a{:href => "#", :title => "English"}
+              English
+              %i.fa.fa-check.language-check{"aria-hidden" => "true"}
+          %li.french-lang
+            %a{:href => "#", :title => "French"}
+              French
+              %i.fa.fa-check.language-check{"aria-hidden" => "true"}
+          %li.chinese-lang
+            %a{:href => "#", :title => "Chinese"}
+              Chinese
+              %i.fa.fa-check.language-check{"aria-hidden" => "true"}
+        / /.dropdown-menu drop-up
+      / /.btn-group#desktop-language-select
+      / Mobile-tablet version
+      #mobile-tablet-language-select-wrapper
+        %ul
+          %li#language-select-header
+            %i.fa.fa-globe.language-icon{"aria-hidden" => "true"}
+            Select language:
+          %li.english-lang.active-lang
+            %a{:href => "#", :title => "English"}
+              English
+              %i.fa.fa-check.language-check{"aria-hidden" => "true"}
+          %li.french-lang
+            %a{:href => "#", :title => "French"}
+              French
+              %i.fa.fa-check.language-check{"aria-hidden" => "true"}
+          %li.chinese-lang
+            %a{:href => "#", :title => "Chinese"}
+              Chinese
+              %i.fa.fa-check.language-check{"aria-hidden" => "true"}
+      / #mobile-tablet-language-select-wrapper
+    / #language-select-wrap
+  / /.container
+  / Social Media Buttons
+  .container.smedia-wrap
+    .row
+      .col-md-12.col-sm-12.footer-social.text-center
+        %ul
+          %li
+            %a{:href => "https://www.instagram.com/", :target => "_blank"}
+              %span.fa-stack.fa-lg
+                %i.fa.fa-circle.fa-stack-2x
+                %i.fa.fa-instagram.fa-stack-1x.fa-inverse
+          %li
+            %a{:href => "https://www.facebook.com/", :target => "_blank"}
+              %span.fa-stack.fa-lg
+                %i.fa.fa-circle.fa-stack-2x
+                %i.fa.fa-facebook.fa-stack-1x.fa-inverse
+          %li
+            %a{:href => "https://twitter.com/", :target => "_blank"}
+              %span.fa-stack.fa-lg
+                %i.fa.fa-circle.fa-stack-2x
+                %i.fa.fa-twitter.fa-stack-1x.fa-inverse
+          %li
+            %a{:href => "https://www.linkedin.com/", :target => "_blank"}
+              %span.fa-stack.fa-lg
+                %i.fa.fa-circle.fa-stack-2x
+                %i.fa.fa-linkedin.fa-stack-1x.fa-inverse
+      / /.footer-social
+    / /.row
+  / /.smedia-wrap
+  / Footer links
+  .container-fluid.footer-bottom
+    .container
+      / Support Links, Row 1
+      #support-links-1.row
+        %ul.support-links
+          %li
+            %a{:href => "#"} About Us
+          %li
+            %a{:href => "#"} Careers
+          %li
+            %a{:href => "#"} Questions
+          %li
+            %a{:href => "#"} Blog
+        / /.support-links
+      / /#support-links-1
+      / Support Links, Row 2
+      #support-links-2.row
+        %ul.support-links
+          %li
+            %a{:href => "#"} Categories
+          %li
+            %a{:href => "#"} How It Works
+          %li
+            - new_project_path = ''; new_worker_path=''
+            %a{:href => new_project_path} Post A Project
+          %li
+            %a{:href => new_worker_path} Become A Worker
+        / /.support-links
+      / /#support-links-1
+      / Legal Declaration
+      #legal-info.row
+        .col-md-12.col-sm-12.col-xs-12.text-center.letter-spacing-1.xs-text-center
+          \© Job&CIE. All rights reserved.
+          = succeed "." do
+            %a{:href => "#"} Terms of Use
+          = succeed "." do
+            %a{:href => "#"} Privacy
+    / /.container
+  / /.footer-bottom
+  / scroll to top
+  %a.scrollToTop{:href => "javascript:;"}
+    %i.fa.fa-caret-up
+

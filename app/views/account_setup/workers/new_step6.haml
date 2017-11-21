@@ -1,0 +1,38 @@
+.account-setup
+  %main
+    .container
+      #register-title-wrapper.row
+        #continued.col-md-8.col-md-offset-2.register-content-title
+          %h1
+            = @title
+          %br
+          %p.subtitle
+            = t("account_setup.worker.step6.you_successfully_created")
+      = render "account_setup/shared/progress_bar", person: @person, progresses: @progresses
+
+      #completed-form.row.form-wrapper
+        .col-md-6.col-md-offset-3.account-setup-step6-content-wrapper.btn-options
+          %form
+            .button-options-wrap
+              / Register as a worker
+              .btn-wrapper.btn-centered.btn-jobcie
+                %a.btn.btn-primary.hvr-pop{:href=>"/"} 
+                  = t("account_setup.worker.step6.go_my_worker")
+              / /.btn-wrapper
+              / Register as a worker
+              .btn-wrapper.btn-centered.btn-facebook.btn-registered
+                %button.btn.btn-primary.hvr-pop{:type => "submit"}
+                  %i.fa.fa-facebook-official{"aria-hidden" => "true"}
+                  = t("account_setup.worker.step6.share_fb")
+
+              .lined-heading
+                %h3
+                  %span.line-left>  
+                  Or
+                  %span.line-right  
+              #invite-button-wrap.btn-wrapper.btn-centered
+                %button.btn.btn-primary.hvr-pop{:type => "submit"} Invite a friend
+                %p to join JOB&amp;CIE community!
+              / /.btn-wrapper
+            / /.button-options-wrap
+        / /.register-content-wrapper

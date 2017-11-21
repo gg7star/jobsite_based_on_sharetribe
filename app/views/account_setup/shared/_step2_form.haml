@@ -1,0 +1,69 @@
+= nested_form_for @person, url: (@person.kind_of?(Business) ? business_account_setup_step3_path : worker_account_setup_step3_path), 
+method: :put, data: {toggle: "validator"} do |f|
+  = f.fields_for (@person.kind_of?(Business) ? :locations : :location), Location.new do |lf|
+    / Select your country
+    .form-group.has-feedback.country-select-block
+      %label
+        = @person.kind_of?(Business) ? t("account_setup.business.step2.business_country") : t("account_setup.worker.step2.worker_country")
+        %span.required-mark *
+      = lf.select :country, options_from_collection_for_select(@countries, "name", "name", lf.object.try(:country)), 
+        {:include_blank => @person.kind_of?(Business) ? t("account_setup.business.step2.select_country") : t("account_setup.worker.step2.select_country") }, 
+        {class: "form-control main_location_input", 
+        required: true}
+      .help-block.with-errors
+    .row
+      .col-md-8
+        / City
+        .form-group.has-feedback
+          %label
+            = @person.kind_of?(Business) ? t("account_setup.business.step2.business_city") : t("account_setup.worker.step2.worker_city")
+            %span.required-mark *
+          = lf.text_field :city, value: lf.object.try(:city), class: "without-border-radious form-control main_location_input", required: "true"
+          %span.glyphicon.form-control-feedback{"aria-hidden" => "true"}
+          .help-block.with-errors
+        / /.form-group
+      / /.col-md-8
+      .col-md-4
+        / Postal code
+        .form-group.has-feedback
+          %label= @person.kind_of?(Business) ? t("account_setup.business.step2.postal_code") : t("account_setup.worker.step2.postal_code")
+          = lf.text_field :postal_code, value: lf.object.try(:postal_code), class: "without-border-radious form-control main_location_input", minlength: "5", pattern: "^[_A-z0-9]{1,}$"
+          %span.glyphicon.form-control-feedback{"aria-hidden" => "true"}
+          .help-block.with-errors
+        / /.form-group
+      / /.col-md-4
+    / /.row
+    .row
+      .col-md-8
+        .form-group.has-feedback
+          %label
+            = @person.kind_of?(Business) ? t("account_setup.business.step2.maximum_distance") : t("account_setup.worker.step2.maximum_distance")
+            %span.required-mark *
+          = lf.select :distance_limit, 
+            options_for_select(Location::DISTANCES, lf.object.try(:distance_limit)), 
+            {:include_blank => @person.kind_of?(Business) ? t("account_setup.business.step2.select") : t("account_setup.worker.step2.select") },
+            {class: "form-control", 
+            required: "true"}          
+          .help-block.with-errors= t("account_setup.business.step2.how_far_are_you_prep")
+        / /.form-group
+      .col-md-4
+        .form-group.has-feedback
+          %label
+            = @person.kind_of?(Business) ? t("account_setup.business.step2.distnace_unit") : t("account_setup.worker.step2.distnace_unit")
+            %span.required-mark *
+          = lf.select :distance_limit_unit, 
+            options_for_select(Location::DISTANCE_UNITS, lf.object.try(:distance_limit_unit)), 
+            {:include_blank => @person.kind_of?(Business) ? t("account_setup.business.step2.select") : t("account_setup.worker.step2.select") },
+            {class: "form-control", 
+            required: "true"}
+          .help-block.with-errors
+        / /.form-group
+  - if params[:controller].include? "business"
+    .add-controls-wrap
+      = f.link_to_add "+ another location", :locations, class: "add_more_locations"
+  / Next Step button
+  #next-step-button.btn-wrapper.btn-centered
+    %button.btn.btn-primary.hvr-pop{:type => "submit"}= @person.kind_of?(Business) ? t("account_setup.business.next_step") : t("account_setup.worker.next_step")
+  / /.btn-wrapper
+  / Steps visual guide
+  = render "account_setup/shared/bottom_progress_bar", progresses: @progresses, person: @person

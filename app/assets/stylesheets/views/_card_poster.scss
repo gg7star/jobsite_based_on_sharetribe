@@ -1,0 +1,1081 @@
+.card-poster-edit {
+	/* ============================================
+	  JOBCIE Card and Project Poster editor pages
+	============================================== */
+
+
+	/* ============================================
+	  Section 1: Default styles (before media queries)
+	============================================== */
+
+	/**--(a) The editing toolbar--**/
+
+    .row,
+    .row-with-divider {
+        margin-bottom: 0px;
+    }
+	    /* ===================================
+	1. Default styles for Worker/Business JOBCIE card
+	====================================== */
+	.biz-card-frame
+	{
+		background:#2c2c2c;
+		-moz-box-shadow: 3px 3px rgba(0,0,0,0.4);
+		-webkit-box-shadow: 3px 3px rgba(0,0,0,0.4);
+		box-shadow: 3px 3px rgba(0,0,0,0.4);
+		padding-top:1em;
+		padding-bottom:1em;
+	}
+	.biz-card-inner-frame
+	{
+	display:table;
+	table-layout:fixed;
+	border-collapse:collapse;
+	width:100%;
+	}
+	.biz-card-promo-pix
+	{
+		width:100%;
+	}
+	.biz-card-promo-pix-wrap
+	{
+		padding:0 1em;
+		text-align:center;
+	}
+	.biz-card-promo
+	{
+	float:left;	
+	width:33.33333333%;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+	}
+	.biz-card-promo img
+	{
+		width:100%;
+		height:auto;
+		display:block;
+		border:0;
+	}
+	.biz-card-promo img a, .biz-card-promo a img
+	{
+		border:0;
+	}
+	.biz-card-promo img:hover
+	{
+		opacity: 0.6;
+		filter: alpha(opacity=60); /* For IE8 and earlier */
+	}
+	.biz-card-logo
+	{
+		padding-top:1em;
+		padding-bottom:1em;
+	}
+	.biz-card-logo
+	{
+		width:40%;
+		text-align:center;
+		vertical-align:middle;
+		display:table-cell;
+	}
+	.biz-card-logo-sizer
+	{
+		padding:1.5em;
+	}
+	.biz-card-logo img
+	{
+		width:100%;
+		height:auto;
+		display:block;
+		border:0;
+	}
+	.biz-card-logo img:hover
+	{
+		opacity: 0.6;
+		    filter: alpha(opacity=60); /* For IE8 and earlier */
+	}
+	.biz-card-desc
+	{
+		vertical-align:top;
+		padding:2em 1em;
+		text-align:left;
+	}
+	.biz-card-desc a i
+	{
+		color:#797979;
+	}
+	.biz-card-desc a:hover i
+	{
+		color:#dcdcdc;
+	}
+
+	/**--Worker/Business NAME--**/
+
+	.biz-card-desc h2.co-name
+	{
+		font-family:"Karla", sans-serif;
+		color:#73f9fa;
+		font-size:1.25em;
+		font-weight:bold;
+		margin:0 0 0 0;
+		padding:0 0 0 0;
+		text-transform:none;
+	}
+	.biz-card-desc h2.co-name a
+	{
+		color:#73f9fa;
+		font-family:"Karla", sans-serif;
+		font-weight:bold;
+		text-decoration:none;
+		border-bottom:1px solid transparent;
+		font-size:100%;
+	}
+	.biz-card-desc h2.co-name a:hover
+	{
+		color:#dcdcdc;
+		border-bottom:1px dashed #fff;
+	}
+
+	/**--Worker/Business LOCATION--**/
+
+	.biz-card-desc h3.co-location
+	{
+		font-family:"Karla", sans-serif;
+		color:#fff;
+		font-size:1.15em;
+		font-weight:bold;
+		margin:0.35em 0;
+		padding:0 0 0 0;
+		text-transform:none;
+	}
+	.biz-card-desc h3.co-location a
+	{
+		font-family:"Karla", sans-serif;
+		color:#fff;
+		font-weight:bold;
+		text-decoration:none;
+		border-bottom:1px solid transparent;
+		font-size:100%;
+	}
+	.biz-card-desc h3.co-location a:hover
+	{
+		color:#dcdcdc;
+		border-bottom:1px dashed #fff;
+	}
+
+	/**--Worker/Business CATEGORY/SKILL--**/
+
+	.biz-card-desc h4.co-cat-skill
+	{
+		font-family:"Karla", sans-serif;
+		color:#e8ffad;
+		font-size:1.15em;
+		font-weight:bold;
+		margin:0 0 0.25em 0;
+		padding:0 0 0 0;
+		text-transform:none;
+	}
+
+	.biz-card-desc h4.co-cat-skill a
+	{
+		font-family:"Karla", sans-serif;
+		color:#e8ffad;
+		font-size:100%;
+		font-weight:bold;
+		text-decoration:none;
+		border-bottom:1px solid transparent;
+	}
+
+	.biz-card-desc h4.co-cat-skill a:hover
+	{
+		color:#dcdcdc;
+		border-bottom:1px dashed #fff;
+	}
+
+	/**--Worker/Business DESCRIPTION--**/
+
+	.biz-card-desc p.co-desc
+	{
+		font-family:"Karla", sans-serif;
+		color:#dcdcdc;
+		font-size:0.9em;
+		font-weight:600;
+		font-style:italic;
+		margin:0.5em 0 0 0;
+		padding:0 0 0 0;
+		text-transform:none;
+		line-height:1.5;
+	}
+
+	.biz-card-desc p.co-desc a
+	{
+		font-family:"Karla", sans-serif;
+		color:#dcdcdc;
+		font-size:100%;
+		font-weight:inherit;
+		font-style:italic;
+		text-decoration:none;
+		border-bottom:1px solid transparent;
+	}
+
+	.biz-card-desc p.co-desc a:hover
+	{
+		color:#dcdcdc;
+		border-bottom:1px dashed #fff;
+	}
+
+	.biz-card-desc p.co-desc .tooltip
+	{
+		font-style:normal;
+	}
+
+
+
+	/* ===================================
+	2. Variations for Worker/Business Dashboard landing page
+	====================================== */
+	.project-block .landing-page-card-wrap img
+	{
+		width:100%;
+		height:auto;
+		display:block;
+		border:0;
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+	.landing-page-card-wrap .edit-card-button .btn-primary
+	{
+		font-size:1em;
+		float:right;
+		margin-right:0;
+		margin-bottom:0;
+	}
+	.landing-page-card-wrap .biz-card-logo-sizer
+	{
+		padding:0.5em 0.5em 0.5em 0.5em;
+	}
+
+	/* ===================================
+	3. Variations for JOBCIE Card Editor page
+	====================================== */
+
+	 #poster-canvas .biz-card-wrapper .biz-card-desc h2.co-name
+	 {
+	 	font-size:1.6em;
+	}
+
+	#poster-canvas .biz-card-wrapper .biz-card-desc h3.co-location
+	{
+		font-size:1.35em;
+		margin:0.5em 0;
+	}
+
+	#poster-canvas .biz-card-wrapper .biz-card-desc p.co-desc
+	{
+		font-size:1.2em;
+		margin:1em 0 0 0;
+		line-height:1.5;
+	}
+
+	/*----Media queries for Section 3. Variations for JOBCIE Card Editor page----*/
+	@media only screen and (max-width:480px) and (min-width:320px){
+		.biz-card-inner-frame
+		{
+		display:block;
+		width:100%;
+		}
+		.biz-card-logo
+		{
+			width:80%;
+			margin:0 10%;
+			text-align:center;
+			display:block;
+		}
+		.biz-card-logo
+		{
+			padding-top:1em;
+			padding-bottom:0;
+		}
+		.biz-card-logo-sizer
+		{
+			padding:0 1.5em 1em 1.5em;
+		}
+		.biz-card-desc
+		{
+			vertical-align:top;
+			padding:1em 2em 2em 2em;
+			text-align:left;
+		}
+	}
+	@media only screen and (max-width:320px) and (min-width:240px){
+		.biz-card-inner-frame
+		{
+		display:block;
+		width:100%;
+		}
+		.biz-card-logo
+		{
+			width:80%;
+			margin:0 10%;
+			text-align:center;
+			display:block;
+		}
+		.biz-card-logo
+		{
+			padding-top:1em;
+			padding-bottom:0;
+		}
+		.biz-card-logo-sizer
+		{
+			padding:0 1.5em 1em 1.5em;
+		}
+		.biz-card-desc
+		{
+			vertical-align:top;
+			padding:1em 2em 2em 2em;
+			text-align:left;
+		}
+	}
+
+
+
+
+
+
+	#project-poster-editor-toolbar
+	{
+		
+		padding:1.25em 0 1.1em 0;
+		margin:0 0 0 0;
+		background:#292929;
+		border-bottom:1px solid #e9e9e9;
+	}
+	#ppe-wrap
+	{
+		display:table;
+		table-layout:fixed;
+		border-collapse:collapse;
+		padding:0 0 0 0;
+		margin:0 0 0 0;
+		text-align:left;
+		width:100%;
+	}
+	.ppe-header
+	{
+		display:table-cell;
+		vertical-align:middle;
+		width:25%;
+		padding:0 0;
+			border-right:1px solid #fff;
+	}
+	.ppe-header#saved-projects
+	{
+		border-right-style:none;
+	}
+	.ppe-header h2
+	{
+		font-family:"Lato", sans-serif;
+		font-size:1.5em;
+		color:#fff;
+		font-weight:600;
+		margin:0 0 0 0;
+		padding:0 0 0 0;
+		text-align:left;
+		text-transform:none;
+	}
+	.ppe-header select
+	{
+		margin:0 0 0 0;
+		padding:0 0 0 0;
+		font-family:"Karl", sans-serif;
+		font-size:1.2em;
+		font-weight:bold;
+		text-transform:none;
+		border-radius:0;
+	}
+	.ppe-actions-menu
+	{
+		display:table-cell;
+		width:75%;
+		text-align:left;
+		margin:0 0 0 0;
+	padding:0 0 0 4em;
+	}
+	.ppe-action-group
+	{
+		margin:0 1em;
+		padding:0 0 0 0;
+		text-align:left;
+		font-size:1.5em;
+		display:inline-block;
+	}
+	.ppe-action-group li
+	{
+		display:inline;
+		font-family:"Lato", sans-serif;
+		padding:0 0 0 0;
+		margin:0 0 0 0;
+		margin-right:1em;
+	}
+	.ppe-action-group li.ppe-action a i
+	{
+		font-weight:normal;
+		color:#fff;
+	}
+	.ppe-action-group li.ppe-action a i:hover
+	{
+		color:#00adef;
+	}
+	.ppe-action-group li.action-group-end
+	{
+		margin-right:2em;
+	}
+	.ppe-done .btn-primary 
+	{
+		padding: 0.5em 1.5em;
+		display: inline-block;
+		font-size:0.8em;	
+		margin:0;
+	}
+	.tooltip-inner 
+	{
+		 color:#fff;
+		 font-weight:bold;
+	}
+
+	/**--(b) The card/poster canvas--**/
+
+	 #main-content.poster-edit-wrap
+	 {
+		 padding:6em 0;
+	 }
+	 
+	 #poster-canvas
+	 {
+		 width:58%;
+		 margin:0 21%;
+	 }
+	 
+	  #poster-canvas img
+	  {
+		  width:100%;
+		  height:auto;
+		  display:block;
+		  border:0;
+	  }
+	  
+	  /* ============================================
+	    Section 2: Responsive design (media queries)
+	  ============================================== */
+	  							
+											
+											/**--Breakpoint (1024-1280 px)--**/
+																		
+	@media only screen and (max-width:1280px) and (min-width:1024px){
+		
+		/**--(a) The editing toolbar--**/
+		
+		#ppe-wrap
+		{
+			display:block;
+			padding:0 0 0 0;
+			margin:0 0 0 0;
+			text-align:center;
+			width:100%;
+		}
+		.ppe-header
+		{
+			display:block;
+			vertical-align:middle;
+			width:100%;
+			padding:0 0;
+				border-right-style:none;
+				text-align:center;
+		}
+		
+		.ppe-header#saved-projects
+		{
+			width:60%;
+			padding:1em 0 1em;
+			border-bottom:1px solid #dcdcdc;
+			margin:0 20% 1em 20%;
+		}
+		
+		.ppe-header h2
+		{
+			font-family:"Lato", sans-serif;
+			font-size:1.75em;
+			color:#fff;
+			font-weight:600;
+			margin:0 0 1em 0;
+			padding:0 0 0.5em 0;
+			text-align:center;
+			text-transform:none;
+			border-bottom:1px solid #212121;
+		}
+		.ppe-actions-menu
+		{
+			display:block;
+			width:100%;
+			text-align:center;
+			margin:0 0 0 0;
+		padding:0 0 0 0;
+		}
+		.ppe-action-group
+		{
+			padding:0 0 0 0;
+			text-align:center;
+			font-size:1.5em;
+		}
+		.ppe-action-group li
+		{
+			display:inline-block;
+			font-family:"Lato", sans-serif;
+			padding:0 0 1em 0;
+			margin:0 0 0 0;
+			margin-right:0.5em;
+			margin-left:0.5em;
+		}
+		.ppe-action-group li.ppe-action a i
+		{
+			font-weight:normal;
+			color:#fff;
+		}
+		.ppe-action-group li.ppe-action a i:hover
+		{
+				color:#00adef;
+		}
+		.ppe-action-group li.action-group-end
+		{
+			margin-right:1em;
+		}
+		.ppe-done .btn-primary {
+			padding:0.5em 1.5em;
+			display:block-inline;
+				font-size:0.8em;	
+				margin:0;
+		}
+	}
+
+														/**--Breakpoint (768-1024 px)--**/
+
+	@media only screen and (max-width:1024px) and (min-width:768px){
+		
+		/**--(a) The editing toolbar--**/
+		
+		#ppe-wrap
+		{
+			display:block;
+			padding:0 0 0 0;
+			margin:0 0 0 0;
+			text-align:center;
+			width:100%;
+		}
+		.ppe-header
+		{
+			display:block;
+			vertical-align:middle;
+			width:100%;
+			padding:0 0;
+				border-right-style:none;
+				text-align:center;
+		}
+		.ppe-header#saved-projects
+		{
+			width:70%;
+			padding:1em 0 1em 0;
+			border-bottom:1px solid #dcdcdc;
+			margin:0 15% 1em 15%;
+		}
+		.ppe-header h2
+		{
+			font-family:"Lato", sans-serif;
+			font-size:1.75em;
+			color:#fff;
+			font-weight:600;
+			margin:0 0 1em 0;
+			padding:0 0 0.5em 0;
+			text-align:center;
+			text-transform:none;
+			border-bottom:1px solid #212121;
+		}
+		.ppe-actions-menu
+		{
+			display:block;
+			width:100%;
+			text-align:center;
+			margin:0 0 0 0;
+		padding:0 0 0 0;
+		}
+		.ppe-action-group
+		{
+			margin:0 0.5em;
+			padding:0 0 0 0;
+			text-align:center;
+			font-size:1.35em;
+		}
+		.ppe-action-group li
+		{
+			display:inline-block;
+			font-family:"Lato", sans-serif;
+			padding:0 0 1em 0;
+			margin:0 0 0 0;
+			margin-right:1em;
+			margin-left:0.5em;
+		}
+		.ppe-action-group li.ppe-action a i
+		{
+			font-weight:normal;
+			color:#fff;
+		}
+
+		.ppe-action-group li.ppe-action a i:hover
+		{
+				color:#00adef;
+		}
+		.ppe-action-group li.action-group-end
+		{
+			margin-right:1em;
+		}
+		.ppe-done .btn-primary {
+			padding:0.5em 1.5em;
+			display:block-inline;
+				font-size:0.8em;	
+				margin:0;
+		}
+		
+		/**--(b) The card/poster canvas--**/
+		
+	    #main-content.poster-edit-wrap
+	    {
+	   	 padding:4em 0;
+	    }
+	    #poster-canvas
+	    {
+	   	 width:86%;
+	   	 margin:0 7%;
+		 }
+	}
+
+													/**---Breakpoint (640-768 px)--**/
+
+	@media only screen and (max-width:768px) and (min-width:640px){
+		
+		/**--(a) The editing toolbar--**/
+		
+		#ppe-wrap
+		{
+			display:block;
+			padding:0 0 0 0;
+			margin:0 0 0 0;
+			text-align:center;
+			width:100%;
+		}
+		.ppe-header
+		{
+			display:block;
+			vertical-align:middle;
+			width:100%;
+			padding:0 0;
+				border-right-style:none;
+				text-align:center;
+		}
+		.ppe-header#saved-projects
+		{
+			width:70%;
+			padding:1em 0 1em 0;
+			border-bottom:1px solid #dcdcdc;
+			margin:0 15% 1em 15%;
+		}
+		.ppe-header h2
+		{
+			font-family:"Lato", sans-serif;
+			font-size:1.75em;
+			color:#fff;
+			font-weight:600;
+			margin:0 0 1em 0;
+			padding:0 0 0.5em 0;
+			text-align:center;
+			text-transform:none;
+			border-bottom:1px solid #212121;
+		}
+		.ppe-actions-menu
+		{
+			display:block;
+			width:100%;
+			text-align:center;
+			margin:0 0 0 0;
+		padding:0 0 0 0;
+		}
+		.ppe-action-group
+		{
+			margin:0 0.5em;
+			padding:0 0 0 0;
+			text-align:center;
+			font-size:1.35em;
+		}
+		.ppe-action-group li
+		{
+			display:inline-block;
+			font-family:"Lato", sans-serif;
+			padding:0 0 1em 0;
+			margin:0 0 0 0;
+			margin-right:0.5em;
+			margin-left:0.5em;
+		}
+		.ppe-action-group li.ppe-action a i
+		{
+			font-weight:normal;
+			color:#fff;
+		}
+		.ppe-action-group li.ppe-action a i:hover
+		{
+				color:#00adef;
+		}
+		.ppe-action-group li.action-group-end
+		{
+			margin-right:1em;
+		}
+		.ppe-done .btn-primary {
+			padding:0.5em 1.5em;
+			display:block-inline;
+				font-size:0.8em;	
+				margin:0;
+		}
+		
+		/**--(b) The card/poster canvas--**/
+		
+	    #main-content.poster-edit-wrap
+	    {
+	   	 padding:4em 0;
+	    }
+	    #poster-canvas
+	    {
+	   	 width:86%;
+	   	 margin:0 7%;
+	    }
+	}
+
+												/**--Breakpoint (480-640px)--**/
+
+	@media only screen and (max-width:640px) and (min-width:480px){
+		
+		/**--(a) The editing toolbar--**/
+		
+		#ppe-wrap
+		{
+			display:block;
+			padding:0 0 0 0;
+			margin:0 0 0 0;
+			text-align:center;
+			width:100%;
+		}
+		.ppe-header
+		{
+			display:block;
+			vertical-align:middle;
+			width:100%;
+			padding:0 0;
+				border-right-style:none;
+				text-align:center;
+		}
+		.ppe-header#saved-projects
+		{
+			width:80%;
+			padding:1em 0 1em 0;
+			border-bottom:1px solid #dcdcdc;
+			margin:0 10% 1em 10%;
+		}
+		.ppe-header h2
+		{
+			font-family:"Lato", sans-serif;
+			font-size:1.75em;
+			color:#fff;
+			font-weight:600;
+			margin:0 0 1em 0;
+			padding:0 0 0.5em 0;
+			text-align:center;
+			text-transform:none;
+			border-bottom:1px solid #212121;
+		}
+		.ppe-actions-menu
+		{
+			display:block;
+			width:100%;
+			text-align:center;
+			margin:0 0 0 0;
+		padding:0 0 0 0;
+		}
+		.ppe-action-group
+		{
+			margin:0 0.25em;
+			padding:0 0 0 0;
+			text-align:center;
+			font-size:1.5em;
+		}
+		.ppe-action-group li
+		{
+			display:inline-block;
+			font-family:"Lato", sans-serif;
+			padding:0 0 1em 0;
+			margin:0 0 0 0;
+			margin-right:0.5em;
+			margin-left:0.5em;
+		}
+		.ppe-action-group li.ppe-action a i
+		{
+			font-weight:normal;
+			color:#fff;
+		}
+		.ppe-action-group li.ppe-action a i:hover
+		{
+				color:#00adef;
+		}
+		.ppe-action-group li.action-group-end
+		{
+			margin-right:3em;
+		}
+		.ppe-action-group li.ppe-done
+		{
+			float:none;
+			clear:both;
+			display:block;
+			text-align:center;
+			margin-bottom:0;
+			padding-bottom:0;
+		}
+		.ppe-done .btn-primary {
+			padding:0.5em 1.5em;
+			display:block-inline;
+				font-size:0.8em;	
+				margin:0;
+		}
+		
+		/**--(b) The card/poster canvas--**/
+		
+	    #main-content.poster-edit-wrap
+	    {
+	   	 padding:4em 0;
+	    }
+	    #poster-canvas
+	    {
+	   	 width:86%;
+	   	 margin:0 7%;
+	    }
+	}
+												/**--Breakpoint (320-480px)--**/
+
+	@media only screen and (max-width:480px) and (min-width:320px){
+		
+		/**--(a) The editing toolbar--**/
+		
+		#ppe-wrap
+		{
+			display:block;
+			padding:0 0 0 0;
+			margin:0 0 0 0;
+			text-align:center;
+			width:100%;
+		}
+		.ppe-header
+		{
+			display:block;
+			vertical-align:middle;
+			width:100%;
+			padding:0 0;
+				border-right-style:none;
+				text-align:center;
+		}
+		.ppe-header#saved-projects
+		{
+			width:90%;
+			padding:1em 0 1em 0;
+			border-bottom:1px solid #dcdcdc;
+			margin:0 5% 1em 5%;
+		}
+		.ppe-header h2
+		{
+			font-family:"Lato", sans-serif;
+			font-size:1.75em;
+			color:#fff;
+			font-weight:600;
+			margin:0 0 1em 0;
+			padding:0 0 0.5em 0;
+			text-align:center;
+			text-transform:none;
+			border-bottom:1px solid #212121;
+		}
+		.ppe-actions-menu
+		{
+			display:block;
+			width:100%;
+			text-align:center;
+			margin:0 0 0 0;
+		padding:0 0 0 0;
+		}
+		.ppe-action-group
+		{
+			margin:0 0 0 0;
+			padding:0 0 0 0;
+			text-align:center;
+			font-size:1.5em;
+		}
+		.ppe-action-group li
+		{
+			display:inline-block;
+			font-family:"Lato", sans-serif;
+			padding:0 0 1em 0;
+			margin:0 0 0 0;
+			margin-right:0.5em;
+			margin-left:0.5em;
+		}
+		.ppe-action-group li.ppe-action a i
+		{
+			font-weight:normal;
+			color:#fff;
+		}
+		.ppe-action-group li.ppe-action a i:hover
+		{
+				color:#00adef;
+		}
+		.ppe-action-group li.action-group-end
+		{
+			margin-right:2em;
+		}
+		.ppe-action-group li.ppe-done
+		{
+			float:none;
+			clear:both;
+			display:block;
+			text-align:center;
+			margin-bottom:0;
+			padding-bottom:0;
+		}
+		.ppe-done .btn-primary {
+			padding:0.5em 1.5em;
+			display:block-inline;
+				font-size:0.8em;	
+				margin:0;
+		}
+		
+		/**--(b) The card/poster canvas--**/
+		
+	    #main-content.poster-edit-wrap
+	    {
+	   	 padding:4em 0;
+	    }
+	    #poster-canvas
+	    {
+	   	 width:86%;
+	   	 margin:0 7%;
+	    }
+	}
+
+										/**--Breakpoint (240-320px)--**/
+
+	@media only screen and (max-width:320px) and (min-width:240px){
+		
+		/**--(a) The editing toolbar--**/
+		
+		#ppe-wrap
+		{
+			display:block;
+			padding:0 0 0 0;
+			margin:0 0 0 0;
+			text-align:center;
+			width:100%;
+		}
+		.ppe-header
+		{
+			display:block;
+			vertical-align:middle;
+			width:100%;
+			padding:0 0;
+				border-right-style:none;
+				text-align:center;
+		}
+		.ppe-header#saved-projects
+		{
+			width:94%;
+			padding:1em 0 1em 0;
+			border-bottom:1px solid #dcdcdc;
+			margin:0 3% 1em 3%;
+		}
+		.ppe-header h2
+		{
+			font-family:"Lato", sans-serif;
+			font-size:1.75em;
+			color:#fff;
+			font-weight:600;
+			margin:0 0 1em 0;
+			padding:0 0 0.5em 0;
+			text-align:center;
+			text-transform:none;
+			border-bottom:1px solid #212121;
+		}
+		.ppe-actions-menu
+		{
+			display:block;
+			width:100%;
+			text-align:center;
+			margin:0 0 0 0;
+		padding:0 0 0 0;
+		}
+		.ppe-action-group
+		{
+			margin:0 0 0 0;
+			padding:0 0 0 0;
+			text-align:center;
+			font-size:1.5em;
+		}
+		.ppe-action-group li
+		{
+			display:inline-block;
+			font-family:"Lato", sans-serif;
+			padding:0 0 1em 0;
+			margin:0 0 0 0;
+			margin-right:0.5em;
+			margin-left:0.5em;
+		}
+		.ppe-action-group li.ppe-action a i
+		{
+			font-weight:normal;
+			color:#fff;
+		}
+		.ppe-action-group li.ppe-action a i:hover
+		{
+				color:#00adef;
+		}
+		.ppe-action-group li.action-group-end
+		{
+			margin-right:2em;
+		}
+		.ppe-action-group li.ppe-done
+		{
+			float:none;
+			clear:both;
+			display:block;
+			text-align:center;
+			margin-bottom:0;
+			padding-bottom:0;
+		}
+		.ppe-done .btn-primary {
+			padding:0.5em 1.5em;
+			display:block-inline;
+				font-size:0.8em;	
+				margin:0;
+		}
+		
+		/**--(b) The card/poster canvas--**/
+		
+	    #main-content.poster-edit-wrap
+	    {
+	   	 padding:4em 0;
+	    }
+	    #poster-canvas
+	    {
+	   	 width:90%;
+	   	 margin:0 5%;
+	    }
+	}
+} 

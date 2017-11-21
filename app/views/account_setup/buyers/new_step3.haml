@@ -1,0 +1,19 @@
+.account-setup
+  %main
+    .container
+      = render "account_setup/shared/header", person: @person, progresses: @progresses, title: @title
+      / Form and card
+      .row.split-screen.form-wrapper
+        / Left column
+        #split-screen-left.col-md-6.split-screen-col.no-row-margins
+          .split-screen-col-inner
+            %div.hide.categories-list-path= categories_list_path()
+            %div.hide.listing_id= @listing.id
+            .categories-skills
+              = render "account_setup/buyers/categories_skills", selected_category: current_parent_category(@listing)
+            
+            = render "account_setup/shared/bottom_progress_bar", progresses: @progresses, person: @person
+            / = render "account_setup/shared/step3_form", person: @person, progresses: @progresses
+        #split-screen-right.col-md-6.split-screen-col
+          .split-screen-col-inner
+            = render "account_setup/shared/project_card", listing: @listing

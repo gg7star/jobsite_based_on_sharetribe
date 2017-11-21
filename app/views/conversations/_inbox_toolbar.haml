@@ -1,0 +1,25 @@
+%section#inbox-toolbar-wrap.clearfix
+  .container
+    #inbox-toolbar-inner
+      / Messages Filter
+      #messages-filter
+        %ul
+          %li#messages-filter-head Filter messages:
+          %li
+            %a.active{:href => "#"} All
+          %li
+            %a{:href => "#"} Clients
+          %li
+            %a{:href => "#"} Teammates
+      / #messages-filter
+      / Messages Search
+      #messages-search
+        .widget
+          %form
+            %i.fa.fa-search.close-search.search-button
+            %input.search-input{:name => "search", :placeholder => "Search messages", :type => "text"}/
+        / /#submenu-tier-search
+      / #messages-search
+    / #inbox-toolbar-inner
+  / /.container
+/ #inbox-toolbar-wrap

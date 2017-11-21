@@ -1,0 +1,242 @@
+/**------------------------------------------------------------------
+Language selector dropup (desktop) or horizontal menu (tablet/mobile)
+-------------------------------------------------------------------**/
+
+.drop-up {
+    top: auto;
+    bottom: 100% !important;
+}
+
+.btn-language {
+	font-family:"Lato", sans-serif;
+    color: #fff;
+	font-weight:bold;
+    border-color: transparent;
+	border-style:none;
+	border-radius:0;
+	padding:0 0;
+	display:block-inline;
+	background: transparent; /* For browsers that do not support gradients */
+		text-decoration:none;
+		text-transform:none;
+		font-size:1.1em;
+		letter-spacing:0;	
+		margin:1.5em 0 0 0;
+}
+
+.btn-language:hover,
+.btn-language:focus,
+.btn-language:active,
+.btn-language.active
+ {
+    color: #00adef;
+}
+.btn-language:active,
+.btn-language.active
+ {
+    background-image: none;
+}
+
+.btn-language .language-icon
+{
+	color:#00adef;
+}
+
+.language-check
+{
+	color:transparent;
+	width:0;
+}
+
+.active-lang .language-check
+{
+	color:#fff;
+	font-weight:bold;
+	width:auto;
+}
+
+.english-lang
+{
+	background: image-url('landing_page/United-Kingdom.png') no-repeat left center;
+	padding-left:20px;
+}
+
+.french-lang
+{
+	background: image-url('landing_page/France.png') no-repeat left center;
+	padding-left:20px;
+}
+
+.chinese-lang
+{
+	background: image-url('landing_page/China.png') no-repeat left center;
+	padding-left:20px;
+}
+
+/**--Desktop version--**/
+
+#language-select-wrap
+{
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+
+#language-select-wrap .btn-group
+{
+	padding:0 0 0 0;
+	margin:0 0 0 0;
+}
+
+#language-select-wrap .dropdown-menu
+{
+	margin-bottom:0;
+	padding-bottom:1em;
+}
+
+/**--Mobile/tablet version--**/
+
+#mobile-tablet-language-select-wrapper
+{
+	display:none;
+}
+
+#mobile-tablet-language-select-wrapper ul
+{
+font-family:"Lato", sans-serif;
+color: #fff;
+font-weight:bold;
+padding:0 0;
+	font-size:1.1em;
+	letter-spacing:0;	
+	margin:1.5em 0 0 0;
+	text-align:left;
+}
+
+#mobile-tablet-language-select-wrapper ul li
+{
+	display:inline;
+	margin-right:0.75em;
+}
+
+#mobile-tablet-language-select-wrapper ul li a
+{
+	color:#898989;
+}
+
+#mobile-tablet-language-select-wrapper ul li a:hover
+{
+	color:#fff;
+}
+
+#mobile-tablet-language-select-wrapper ul li.active-lang a
+{
+	color:#fff;
+}
+
+#mobile-tablet-language-select-wrapper ul li .language-icon
+{
+	color:#00adef;
+}
+
+#mobile-tablet-language-select-wrapper ul li#language-select-header
+{
+}
+
+
+
+													/**--Responsive design media queries--**/
+													
+@media only screen and (max-width:1024px) and (min-width:768px){
+	#desktop-language-select
+	{
+		display:none;
+	}
+	#mobile-tablet-language-select-wrapper
+	{
+		display:block;
+		margin-bottom:1em;
+	}
+	#mobile-tablet-language-select-wrapper ul
+	{
+		text-align:center;
+	}
+}
+@media only screen and (max-width:768px) and (min-width:640px){
+	#desktop-language-select
+	{
+		display:none;
+	}
+	#mobile-tablet-language-select-wrapper
+	{
+		display:block;
+		margin-bottom:1em;
+	}
+	#mobile-tablet-language-select-wrapper ul
+	{
+		text-align:center;
+	}
+}
+@media only screen and (max-width:640px) and (min-width:480px){
+	#desktop-language-select
+	{
+		display:none;
+	}
+	#mobile-tablet-language-select-wrapper
+	{
+		display:block;
+		margin-bottom:1em;
+	}
+	#mobile-tablet-language-select-wrapper ul
+	{
+		text-align:center;
+	}
+}
+@media only screen and (max-width:480px) and (min-width:320px){
+	#desktop-language-select
+	{
+		display:none;
+	}
+	#mobile-tablet-language-select-wrapper
+	{
+		display:block;
+		margin-bottom:1em;
+	}
+	#mobile-tablet-language-select-wrapper li#language-select-header
+	{
+		display:block;
+		width:100%;
+		margin-bottom:0.5em;
+	}
+	#mobile-tablet-language-select-wrapper ul
+	{
+		font-size:1em;
+	}
+	#mobile-tablet-language-select-wrapper ul
+	{
+		text-align:center;
+	}
+}
+@media only screen and (max-width:320px) and (min-width:240px){
+	#desktop-language-select
+	{
+		display:none;
+	}
+	#mobile-tablet-language-select-wrapper
+	{
+		display:block;
+	}
+	#mobile-tablet-language-select-wrapper li#language-select-header
+	{
+		display:block;
+		width:100%;
+		margin-bottom:0.5em;
+	}
+	#mobile-tablet-language-select-wrapper ul
+	{
+		font-size:1em;
+	}
+	#mobile-tablet-language-select-wrapper ul
+	{
+		text-align:center;
+	}
+}

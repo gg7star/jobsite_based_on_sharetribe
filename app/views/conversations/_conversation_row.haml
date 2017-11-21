@@ -1,0 +1,20 @@
+/ Message (1)
+.message-wrap.clearfix
+  / Avatar
+  .msg-avatar
+    = image_tag(message_receiver(conversation).image.present? ? message_receiver(conversation).image.url(:thumb) : ActionController::Base.helpers.image_path("profile_image/thumb/missing.png"), :class => "roundedimage")
+  / /.msg-avatar
+  / Preview
+  .msg-preview
+    %article
+      %h2.clearfix
+        %a{:href => "#"}
+          = message_receiver(conversation).full_name
+          %span.new-msg 2
+        %span.msg-timestamp 
+          = time_ago(conversation.last_message_at)
+      %h3.position Personal assistant, business manager
+      %p.msg-preview-text 
+        = conversation.last_message.content[0..20]
+  / /.msg-preview
+/ /.message-wrap

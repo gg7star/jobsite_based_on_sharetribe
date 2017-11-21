@@ -1,0 +1,285 @@
+- is_account_setup = params[:controller].include? "account_setup"
+.topbar
+  %nav.navbar.navbar-default.navbar-fixed-top.nav-transparent.overlay-nav.sticky-nav.nav-border-bottom.nav-dark
+    .container
+      .row
+        - if logged_in
+          / Job CIE logo
+          .col-md-2.pull-left
+            %a.logo-light{:href => "/"}
+              %img.logo{:alt => "", :src => asset_path('/assets/logos/header/default.png') }/
+            %a.logo-dark{:href => "/"}
+              %img.logo{:alt => "", :src => asset_path('/assets/logos/header/default.png') }/
+          / Search and username
+          .col-md-2.no-padding-left.search-user-header.pull-right
+            / Search icon
+            - unless is_account_setup
+              #top-search
+                %a.header-search-form{:href => "#search-header"}
+                  %i.fa.fa-search.search-button
+              / Search box popup
+              %form#search-header.mfp-hide.search-form-result{:action => "#", :method => "post", :name => "search-header"}
+                .search-form.position-relative
+                  %button.fa.fa-search.close-search.search-button{:type => "submit"}
+                  %input.search-input{:autocomplete => "off", :name => "search", :placeholder => "Search JOB&CIE...", :type => "text"}/
+              / Username
+            .user-profile
+              / Username dropdown prompt
+              %a.user-profile-dropdown{:href => "#"}
+                %i.fa.fa-user-circle{"aria-hidden" => "true"}
+                .subtitle
+                  = current_user_name
+                  %i.fa.fa-angle-down{"aria-hidden" => "true"}
+              / Username dropdown box
+              .user-profile-dropdown-body
+                %ul.profile-header
+                  %li
+
+                    %a#profile-name{:href => settings_path}
+                      %img.roundedimage{:alt => "", :height => "90", :src => "/assets/profile_image/thumb/missing.png", :width => "90"}>/
+
+                      = current_user_name
+                    %a#edit-profile{:href => settings_path, :title => "Edit profile"} Edit
+                / /.profile-header
+                / Username menu here
+                %ul.user-profile-menu
+                  %li
+                    %a{:href => profile_path + "/card_poster_edit", :title => "Edit my JOB&CIE card"}
+                      %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                      Edit my JOB&amp;CIE card
+                  %li
+                    %a{:href => "packages1.html", :title => "Modify my JOB&CIE package"}
+                      %i.fa.fa-sliders{"aria-hidden" => "true"}
+                      Modify my JOB&amp;CIE package
+                  %li
+                    %a{:href => "packages1.html"}
+                      %i.fa.fa-cart-plus{"aria-hidden" => "true"}
+                      BUY my JOB&amp;CIE package
+                  %li
+                    %a{:href => settings_path, :title => "Settings"}
+                      %i.fa.fa-cog{"aria-hidden" => "true"}
+                      Settings
+                / /.user-profile-menu
+                / Account action buttons here
+                %p.buttons
+                  .btn.btn-very-small-white.no-margin-bottom.margin-seven.no-margin-right.pull-right.menu-log-out-button
+                    = link_to logout_path do
+                      = icon_map_tag(icons, "logout", ["icon-with-text"])
+                      = t("layouts.logged_in.logout")
+                / /.buttons
+              / /.user-profile-dropdown-body
+            / /.user-profile
+          / /.search-cart-header
+          / Toggle navigation
+          .navbar-header.col-sm-8.col-xs-2.pull-right
+            %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+          / Main Menu
+          - unless is_account_setup
+            .col-md-8.no-padding-right.accordion-menu.text-right
+              .navbar-collapse.collapse
+                %ul#accordion.nav.navbar-nav.navbar-right.panel-group
+                  / Dashboards
+                  %li#menu-dashboard.dropdown.panel.simple-dropdown
+                    %a.dropdown-toggle.collapsed{"data-hover" => "dropdown", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#dashboard"}
+                      = session[:dashboard_mode]
+                      Dashboard
+                      %i.fa.fa-angle-down
+                    %ul#dashboard.dropdown-menu.panel-collapse.collapse{:role => "menu"}
+                      - if worker_or_business?
+                        %li.dropdown-header Dashboards
+                        %li
+                          %a{:href => "/?dashboard_mode=worker"}
+                            Worker Dashboard
+                      %li
+                        %a{:href => "/?dashboard_mode=client"}
+                          Client Dashboard
+                  - if worker_dashboard_mode?
+                    / Connections
+                    %li#menu-inbox.dropdown.panel.simple-dropdown
+                      %a.dropdown-toggle.collapsed{"data-hover" => "dropdown", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#inbox"}
+                        Connections
+                        %i.fa.fa-angle-down
+                      %ul#inbox.dropdown-menu.panel-collapse.collapse{:role => "menu"}
+                        %li.dropdown-header Inbox
+                        %li
+                          %a{:href => conversations_path}
+                            Messages
+                            %span.menu-new= unread_count
+                        %li
+                          %a{:href => "#"}
+                            Client Feedback
+                            %span.menu-new 1
+                          %br/
+                        %li.dropdown-header Offers
+                        %li
+                          %a{:href => "#", :title => "Offers Received"}
+                            Offers Received
+                            %span.menu-new 2
+                        %li
+                          %a{:href => "#", :title => "Offers Sent"} Offers Sent
+                          %br/
+                        %li.dropdown-header{:title => "Teammates"} Teammates
+                        %li
+                          %a{:href => "#", :title => "My Teammates"} My Teammates
+                        %li
+                          %a{:href => "#"}
+                            My Team Invitations
+                            %span.menu-new 1
+                    / /#menu-inbox
+                    / Projects
+                    %li#menu-projects.dropdown.panel.simple-dropdown
+                      %a.dropdown-toggle.collapsed{"data-hover" => "dropdown", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#projects"}
+                        Projects
+                        %i.fa.fa-angle-down
+                      %ul#projects.dropdown-menu.panel-collapse.collapse{:role => "menu"}
+                        %li.dropdown-header Manage Projects
+                        %li
+                          %a{:href => "#"} Active
+                        %li
+                          %a{:href => "#"} Completed
+                          %br/
+                        %li.dropdown-header Post A Project
+                        %li
+                          %a{:href => buyer_account_setup_step1_path} Create New Project
+                      / #projects
+                    / /#menu-projects
+                  - else
+                    / Connections
+                    %li#menu-inbox.dropdown.panel.simple-dropdown
+                      %a.dropdown-toggle.collapsed{"data-hover" => "dropdown", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#inbox"}
+                        Connections
+                        %i.fa.fa-angle-down
+                      %ul#inbox.dropdown-menu.panel-collapse.collapse{:role => "menu"}
+                        %li.dropdown-header Inbox
+                        %li
+                          %a{:href => conversations_path}
+                            Messages
+                            %span.menu-new= unread_count
+                        %li
+                          %a{:href => "#"}
+                            Project Feedback
+                            %span.menu-new 1
+                          %br/
+                        %li.dropdown-header Offers
+                        %li
+                          %a{:href => "#", :title => "Offers Received"}
+                            Offers Received
+                            %span.menu-new 2
+                        %li
+                          %a{:href => "#", :title => "Offers Sent"} Offers Archieved
+                          %br/
+                    / /#menu-inbox
+                    / Projects
+                    %li#menu-projects.dropdown.panel.simple-dropdown
+                      %a.dropdown-toggle.collapsed{"data-hover" => "dropdown", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#projects"}
+                        Projects
+                        %i.fa.fa-angle-down
+                      %ul#projects.dropdown-menu.panel-collapse.collapse{:role => "menu"}
+                        %li.dropdown-header Post A Project
+                        %li
+                          %a{:href => buyer_account_setup_step1_path} Create New Project
+                        %li
+                          %a{:href => "#"} Edit Project Poster
+                          %br/
+                        %li.dropdown-header Manage Projects
+                        %li
+                          %a{:href => "#"} Active
+                        %li
+                          %a{:href => "#"} Completed
+                          
+                      / #projects
+                    / /#menu-projects
+                  / Forum
+                  %li
+                    %a{:href => "#", :title => "Forum"} Forum
+                  / Blog
+                  %li
+                    %a{:href => "#", :title => "Blog"} Blog
+        - unless logged_in
+          / Job CIE logo
+          .col-md-4.pull-left
+            %a.logo-light{:href => "index.html"}
+              %img.logo{:alt => "", :src => asset_path('/assets/logos/header/default.png') }/
+            %a.logo-dark{:href => "index.html"}
+              %img.logo{:alt => "", :src => asset_path('/assets/logos/header/default.png') }/
+          / Search and username
+          .navbar-header.col-sm-8.col-xs-2.pull-right
+            %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+          .col-md-8.no-padding-right.accordion-menu.text-right
+            .navbar-collapse.collapse
+              %ul#accordion.nav.navbar-nav.navbar-right.panel-group
+                %li
+                  = link_to login_path, id: "header-login-link" do
+                    = t("header.login")
+                %li
+                  = link_to sign_up_path do
+                    = t("header.signup")
+                %li
+                  = link_to t("homepage.index.post_new_listing"), new_listing_path, :class => "become-worker", :id => "new-listing-link"
+/ -# Hide header in map view if mobile
+/ %header.header
+/   .header-wrapper
+/     .header-right.header-padding.visible-tablet
+/       = link_to t("homepage.index.post_new_listing"), new_listing_path, :class => "new-listing-link", :id => "new-listing-link"
+
+/     .header-right.visible-tablet
+/       #header-menu-desktop-anchor.header-menu-container.toggle.hidden{data: {toggle: '#header-menu-toggle-menu', 'toggle-position' => 'absolute'}}
+
+/     - if logged_in
+/       .header-right
+/         = render :partial => "layouts/header_anchors", locals: {avatar_url: avatar_url, current_user_name: current_user_name, icons: icons}
+/         = render :partial => "layouts/header_user_menu", locals: {unread_count: unread_count, inbox_path: inbox_path, profile_path: profile_path, manage_listings_path: manage_listings_path, settings_path: settings_path, logout_path: logout_path, icons: icons}
+
+/       = render :partial => "layouts/header_right_visible_tablet", locals: {unread_count: unread_count, inbox_path: inbox_path, icons: icons}
+
+/     - if available_locales.size > 1
+/       .header-right.visible-desktop
+/         #header-locales-menu.toggle.header-hover{data: {toggle: '#header-locales-toggle-menu', 'toggle-position' => 'absolute'}}
+/           %span.header-text-link
+/             = current_locale_name
+/             = icon_map_tag(icons, "dropdown", ["icon-dropdown"])
+/         #header-locales-toggle-menu.toggle-menu.header-toggle-menu-language.hidden
+/           = render :partial => "layouts/locale_select", :collection => available_locales, :as => :loc_array, locals: {return_after_locale_change: return_after_locale_change}
+
+/     - unless logged_in
+/       .header-right
+/         = link_to login_path, class: "header-text-link header-hover", id: "header-login-link" do
+/           = t("header.login")
+/       .header-right
+/         = link_to sign_up_path, class: "header-text-link header-hover" do
+/           = t("header.signup")
+
+/     .header-left.hidden-tablet
+/       .header-menu-container.toggle.hidden{data: {toggle: '#header-menu-toggle-menu', 'toggle-position' => 'absolute'}}
+/         #header-menu-mobile-anchor.header-menu-toggle-container.toggle-header-container
+/           = icon_map_tag(icons, "rows", ["header-menu-icon"])
+/           %span.visible-tablet-inline
+/             = t("header.menu")
+
+/     = render :partial => "layouts/header_menu", locals: { return_after_locale_change: return_after_locale_change, available_locales: available_locales, icons: icons}
+
+/     -#
+/       If necessary, the buttons will overlap with the logo. Buttons should be on top, that's
+/       keep the logo here after buttons
+/     .header-left.header-logo-container
+/       = link_to landing_page_path, :class => "header-logo", :id => "header-logo" do
+/         - if @current_community.logo.present?
+/           %i.header-square-logo.hidden-tablet
+/             -# Logo is here, it's a CSS background
+/         - else
+/           %span.header-square-logo-text.hidden-tablet
+/             = @current_community.name(I18n.locale)[0]
+/         - if @current_community.wide_logo.present?
+/           %i.header-wide-logo.visible-tablet
+/             -# Logo is here, it's a CSS background
+/         - else
+/           %span.header-wide-logo-text.visible-tablet
+/             = @current_community.name(I18n.locale)

@@ -1,0 +1,15 @@
+{
+  "repository": "sharetribe/sharetribe",
+  "name": "JobCIE",
+  "version": "1.0.0",
+  "license": "MIT",
+  "engines": {
+    "node": "6.9",
+    "npm": "3.10.10"
+  },
+  "scripts": {
+    "postinstall": "cd client && npm install",
+    "clean": "rm -f app/assets/webpack/*"
+  },
+  "cacheDirectories": ["node_modules", "client/node_modules"]
+}

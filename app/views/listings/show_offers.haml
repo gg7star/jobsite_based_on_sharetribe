@@ -1,0 +1,32 @@
+= render partial: 'layouts/header_submenu', locals: header_props()
+.show-offers
+  %section.dashboard
+    #main-content.inbox-with-submenu
+      .listing-index
+        - content_for :search_bar_left_block do
+          %ul
+            %li#messages-filter-head Select project:
+            - @current_user.listings.each do |l|
+              %li= link_to(l.title, listing_offers_path(listing_id: l.id), class: "#{l.id == @listing.id ? "active" : ""}")
+        = render "/layouts/search_bar"
+      .container
+        #inbox-wrap.row
+          / Dashboard sidebar
+          / My profile
+          #inbox-right-sidebar.col-md-2.col-sm-4.sidebar.xs-margin-top-ten.clearfix
+            = render "/dashboard/sidebar"
+          #inbox-main-col.col-md-10.col-sm-8
+            %article
+              %h2
+                = @listing.title
+                %span posted #{@listing.posted_days_ago} days ago
+              .project-blocks-row.clearfix
+                / Project (Client view, featured project)
+                #client-view-featured-project
+                  = render "listings/listing", listing: @listing
+              #received-offers-stack.clearfix
+                %h2
+                  Received offers
+                  %span #{@listing.offers.count} offers received
+                - @listing.offers.each do |offer|
+                  = render "/listings/offer", offer: offer

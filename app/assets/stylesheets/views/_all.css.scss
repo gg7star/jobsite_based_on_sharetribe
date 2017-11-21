@@ -1,0 +1,160 @@
+
+/**--Top (whole site) search bar--**/
+
+#top-search 
+{ 
+	float: right; 
+	margin: 1px 0 0 18px; 
+	position: relative; 
+	padding-bottom: 17px;
+}
+
+.search-form 
+{
+	width:45%; 
+	margin: 0 auto; 
+	top:40%;
+}
+.search-form .search-input 
+{ 
+	border:none; 
+	border-bottom:2px solid #000; 
+	font-size:30px; 
+	font-weight:100; 
+	padding:20px 2px; 
+	text-transform:capitalize; 
+	background: transparent; 
+	line-height:40px; 
+}
+.search-form .search-input:focus
+{
+	outline: none
+}
+.search-input ::-moz-placeholder, .search-input [placeholder] 
+{ 
+	color: #ff0000 !important; 
+}
+
+.search-form .search-button {font-size:21px; color:#000; top:31px; right: 0}
+#search-header {height:100%}
+
+.close-search { color: #373737; position: absolute; right: 0; top: 23px; z-index: 998; cursor: pointer; }
+.close-search:hover { color: #9a9a9a;}
+
+.search-button { cursor: pointer;  z-index: 0; color: #373737; margin-right: 0; border: none; background: none; }
+.search-user-header i { display: initial; }
+.search-button:hover { color: #9a9a9a;}
+
+
+
+/**--Inbox pages--**/
+
+#inbox-wrap
+{
+}
+
+#inbox-main-col, #inbox-right-sidebar
+{
+	padding:2.5em 0 10em 0;
+}
+
+#inbox-main-col
+{
+	border-left:1px solid #e9e9e9;
+}
+
+#inbox-right-sidebar
+{
+}
+
+#inbox-main-col h2, #inbox-right-sidebar h2
+{
+	font-size:2em;
+	font-family:"Lato", sans-serif;
+	color:#525252;
+	font-weight:600;
+	margin:0 0 1em 0;
+	padding:0 0 0 0;
+	text-transform:none;
+	letter-spacing:0;
+}
+
+#inbox-main-col h2 span
+{
+	font-weight:600;
+	color:#999;
+	font-size:80%;
+	padding-left:0.5em;
+}
+
+#inbox-main-col article
+{
+	padding:0 0 0 3.5em;
+}
+
+#inbox-right-sidebar .sidebar-menu
+{
+	font-size:1.2em;
+	line-height:2;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+
+#inbox-right-sidebar .sidebar-menu li
+{
+	margin-left:0.5em;
+}
+
+#inbox-right-sidebar .sidebar-menu li.sidebar-menu-header
+{
+	font-weight:bold;
+	color:#424242;
+	margin-top:0.5em;
+	margin-left:0;
+}
+
+#inbox-right-sidebar .sidebar-menu li.sidebar-menu-header:first-child
+{
+	margin-top:0;
+}
+
+#inbox-right-sidebar .sidebar-menu li a:hover
+{
+	color:#00adef;
+}
+
+
+.project-blocks-row
+{
+	padding-top:1.5em;
+	padding-bottom:1em;
+}
+
+.project-block
+{
+	width:50%;
+	float:left;
+	padding:0;
+	margin:0 0 2em 0;
+}
+
+
+/**--New messages/offers--**/
+.menu-new
+{ 
+	background:#8ec63f; 
+	padding:0 6px 1px 5px; 
+	font-size:10px; 
+	color:#fff; 
+	margin-left:5px;
+	font-weight:bold;
+}
+.sticky-nav.nav-border-bottom 
+{ 
+	border-bottom: 1px solid rgba(0,0,0,0);
+}
+.shrink-nav.nav-border-bottom 
+{ 
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+

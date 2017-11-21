@@ -1,0 +1,5 @@
+/* Remove previous dialog content */
+$("#clientsModal").html('');
+/* Add dialog content */
+$("#clientsModal").append("<%= escape_javascript(render(:partial => 'layouts/submenu/connection_online_status', locals: {statuslist: statuslist})) %>");
+$("#clientsModal").modal('show');

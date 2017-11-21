@@ -1,0 +1,39 @@
+.profile-overview.clearfix
+  %h2
+    My Profile
+    %a{:href => "card-poster-editor.html"}
+      %i.fa.fa-search-plus{"aria-hidden" => "true"}>
+      View
+  %ul.profile-header
+    %li
+      %a#profile-name-sidebar{:href => "#"}
+        %img.roundedimage{:alt => "", :height => "90", :src => asset_path('/assets/avatar_examples/avatar-90.jpg'), :width => "90"}/
+        %span.profile-name-txt Jane Doe
+      / Offers summary
+      - if @current_user.recieved_offers_count > 0
+        = link_to listing_offers_path(listing_id: @current_user.latest_recieved_offer.id), :title => "My Received Offers" do
+          #{@current_user.recieved_offers_count} received offers
+          %span.menu-new #{@current_user.recieved_new_offers_count} new
+      %a.offers-summary{:href => "active-projects-worker.html", :title => "My Active Projects"} 3 active projects
+      %a.offers-summary{:href => "#"} 6 weekly reply credits left
+  / /.profile-header
+/ /.profile-overview
+/ My categories
+.category-overview.clearfix
+  %h2
+    My Categories
+    %span  
+    %a{:href => "#"}
+      %i.fa.fa-pencil-square{"aria-hidden" => "true"}>
+      Edit
+  %ul.dash-cat-overview
+    %li
+      %a{:href => "#"} Home Help
+    %li
+      %a{:href => "#"} Education
+    %li
+      %a{:href => "#"} Professional
+  / /.dash-cat-overview
+/ /.profile-overview
+/ /#inbox-right-sidebar
+/ Inbox, main content (floats right)
