@@ -31,8 +31,3 @@
 * Once the Pull Request has been approved, merge the branch and deploy
 * Verify the changes on the Server after the change has been deployed
 
-##Server
-
-http://jobcie.degries.com
-
-Please mail to joellejmaze918@gmail.com for server issues.
